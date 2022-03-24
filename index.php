@@ -2,136 +2,107 @@
     get_header();
 ?>
 
+<main class="main-content">
 
 <section class="main-post">
     <div class="container">
-        <div class="main-post__block v-row">
-            <div class="main-post__desc v-col-lg-5 v-col-md-12 v-col">
-                <a href="#" class="main-post__desc-title post__title">How to Improve SEO Rankings in 11 Steps</a>
-                <p class="main-post__desc-text post__text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules. Learn all about how you can...</p>
-                <div class="main-post__desc-view">
-                    <span class="post__date">Feb 11, 2022</span>
-                    <a href="#" class="post__category">Tactics & Troubleshooting</a>
-                    <span class="post__time-to-read">14min read</span>
+    <?php 
+        $posts = get_posts( array(
+            'numberposts' => 1,
+            'category_name'    => 'main-post',
+            'orderby'     => 'date',
+            'order'       => 'ASC',
+            'post_type'   => 'post',
+            'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+        ) );
+
+        foreach( $posts as $post ){
+            setup_postdata($post);
+            ?>
+
+            <div class="main-post__block v-row">
+                <div class="main-post__desc v-col-lg-5 v-col-md-12 v-col">
+                    <a href="#" class="main-post__desc-title post__title"><?php the_title(); ?></a>
+                    <p class="main-post__desc-text post__text"><?php the_field('main-post_text'); ?></p>
+                    <div class="main-post__desc-view">
+                        <span class="post__date"><?php the_field('main-post_date'); ?></span>
+                        <a href="#" class="post__category"><?php the_field('main-post_category'); ?></a>
+                        <span class="post__time-to-read"><?php the_field('main-post_time'); ?></span>
+                    </div>
+                </div>
+                <div class="main-post__img v-col-lg-5 v-col-md-12 v-col">
+                <?php
+                    $image = get_field('main-post_img');
+
+                    if (!empty($image)): ?>
+                        <img 
+                        src="<?php echo $image['url']; ?>" 
+                        alt="<?php echo $image['alt']; ?>">
+                    <?php endif;?>
                 </div>
             </div>
-            <img src="<?php echo bloginfo('template_url'); ?>/assets/img/girl.png" class="main-post__img v-col-lg-5 v-col-md-12 v-col" alt="logo" loading="lazy">
-        </div>
+
+        <?php
+        }
+
+        wp_reset_postdata(); // сброс
+        ?>
+
     </div>
 </section>
 
 
-
 <section class="articles container" data-animation-post-cards>
     <div class="v-row">
-        <article class="article v-col-lg-6 v-col-md-12  post-card-animation">
-            <div class="article-content">
-                <div class="article-content__img bg-orange">
-                    <img class="article-content__img-img" src="<?php echo bloginfo('template_url'); ?>/assets/img/ar1.png" alt="article-img" loading="lazy">
+
+    <?php 
+        $posts = get_posts( array(
+            'numberposts' => -1,
+            'category_name'    => 'article',
+            'orderby'     => 'date',
+            'order'       => 'ASC',
+            'post_type'   => 'post',
+            'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+        ) );
+
+        foreach( $posts as $post ){
+            setup_postdata($post);
+            ?>
+            <article class="article v-col-lg-4 v-col-md-6 v-col">
+                <div class="article-content">
+                    <div class="article-content__img bg-orange">
+                        <img class="article-content__img-img" src="<?php 
+                                if(has_post_thumbnail()) {
+                                    the_post_thumbnail_url();
+                                } else {
+                                    echo get_template_directory_uri() . '/assets/img/not-found.png';
+                                }
+                             ?>" alt="article-img" loading="lazy">
+                    </div>
+                    <div class="article-content__header">
+                        <a href="#" class="post__category"><?php the_field('article_category'); ?></a>
+                        <span class="post__time-to-read"><?php the_field('article_time'); ?></span>
+                    </div>
+                    <div class="article-content__body">
+                        <a href="#" class="post__title"><?php the_title(); ?></a>
+                        <p class="post__text article-content__body-text">
+                        <?php the_field('article_text'); ?>
+                        </p>
+                    </div>
+                    <div class="article-content__footer">
+                        <a href="#" class="post__author"><?php the_field('article_author'); ?></a>
+                        <span class="post__date"><?php the_field('article_date'); ?></span>
+                    </div>
                 </div>
-                <div class="article-content__header">
-                    <a href="#" class="post__category">Tactics & Troubleshooting</a>
-                    <span class="post__time-to-read">14min read</span>
-                </div>
-                <div class="article-content__body">
-                    <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                    <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules. 
-                        Learn all about how you can...
-                    </p>
-                </div>
-                <div class="article-content__footer">
-                    <a href="#" class="post__author">Alina</a>
-                    <span class="post__date">Feb 11, 2022</span>
-                </div>
-            </div>
-        </article>
-        <article class="article v-col-lg-6 v-col-md-12 post-card-animation">
-            <div class="article-content">
-                <div class="article-content__img bg-orange">
-                    <img class="article-content__img-img" src="<?php echo bloginfo('template_url'); ?>/assets/img/ar2.png" alt="article-img" loading="lazy">
-                </div>
-                <div class="article-content__header">
-                    <a href="#" class="post__category">Tactics & Troubleshooting</a>
-                    <span class="post__time-to-read">14min read</span>
-                </div>
-                <div class="article-content__body">
-                    <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                    <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                        Learn all about how you can...
-                    </p>
-                </div>
-                <div class="article-content__footer">
-                    <a href="#" class="post__author">Alina</a>
-                    <span class="post__date">Feb 11, 2022</span>
-                </div>
-            </div>
-        </article>
+            </article>
+
+        <?php
+        }
+
+        wp_reset_postdata(); // сброс
+        ?>
+
         
-        
-        <article class="article v-col-lg-4 v-col-md-12 post-card-animation">
-            <div class="article-content">
-                <div class="article-content__img bg-orange">
-                    <img class="article-content__img-img" src="<?php echo bloginfo('template_url'); ?>/assets/img/ar1.png" alt="article-img" loading="lazy">
-                </div>
-                <div class="article-content__header">
-                    <a href="#" class="post__category">Tactics & Troubleshooting</a>
-                    <span class="post__time-to-read">14min read</span>
-                </div>
-                <div class="article-content__body">
-                    <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                    <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                        Learn all about how you can...
-                    </p>
-                </div>
-                <div class="article-content__footer">
-                    <a href="#" class="post__author">Alina</a>
-                    <span class="post__date">Feb 11, 2022</span>
-                </div>
-            </div>
-        </article>
-        <article class="article v-col-lg-4 v-col-md-12 post-card-animation">
-            <div class="article-content">
-                <div class="article-content__img bg-orange">
-                    <img class="article-content__img-img" src="<?php echo bloginfo('template_url'); ?>/assets/img/ar2.png" alt="article-img" loading="lazy">
-                </div>
-                <div class="article-content__header">
-                    <a href="#" class="post__category">Tactics & Troubleshooting</a>
-                    <span class="post__time-to-read">14min read</span>
-                </div>
-                <div class="article-content__body">
-                    <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                    <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                        Learn all about how you can...
-                    </p>
-                </div>
-                <div class="article-content__footer">
-                    <a href="#" class="post__author">Alina</a>
-                    <span class="post__date">Feb 11, 2022</span>
-                </div>
-            </div>
-        </article>
-    
-        <article class="article v-col-lg-4 v-col-md-12 post-card-animation">
-            <div class="article-content">
-                <div class="article-content__img bg-orange">
-                    <img class="article-content__img-img" src="<?php echo bloginfo('template_url'); ?>/assets/img/ar2.png" alt="article-img" loading="lazy">
-                </div>
-                <div class="article-content__header">
-                    <a href="#" class="post__category">Tactics & Troubleshooting</a>
-                    <span class="post__time-to-read">14min read</span>
-                </div>
-                <div class="article-content__body">
-                    <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                    <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                        Learn all about how you can...
-                    </p>
-                </div>
-                <div class="article-content__footer">
-                    <a href="#" class="post__author">Alina</a>
-                    <span class="post__date">Feb 11, 2022</span>
-                </div>
-            </div>
-        </article>
     </div>
 </section>
         
@@ -158,164 +129,131 @@
     </ul>
 </div>
 
-<section class="main-post-event container">
-    <div class="main-post-event__block v-row">
-        <div class="main-post-event__desc v-col-lg-6 v-col-md-12">
-            <span class="mark-round bg-orange black">Online Event</span>
-            <a href="#" class="main-post-event__desc-title post__title">Join an interactive expert discussion with Spystealth</a>
-            <p class="main-post-event__desc-text post__text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules. Learn all about how you can...</p>
-            <a class="button__register" href="#">Register Now</a>
-        </div>
-        <img src="<?php echo bloginfo('template_url'); ?>/assets/img/girl.png" class="main-post-event__img v-col-lg-6 v-col-md-12" alt="logo" loading="lazy">
-    </div>
-</section>
 
 <section class="editor-post container v-row">
     <h1 class="main__title black v-col">Editors' Choice</h1>
-    <div class="articles" data-animation-post-cards>
-        <article class="article v-col-lg-6 v-col-md-6  post-card-animation">
-            <div class="article-content">
-                <div class="article-content__body">
-                    <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                    <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                        Learn all about how you can...
-                    </p>
-                </div>
-                <div class="article-content__footer">
-                    <a href="#" class="post__category">Link Building</a>
-                    <span class="post__date">Feb 11, 2022</span>
-                </div>
-            </div>
-        </article>
+       <div class="articles">
+
+        <?php 
+            $posts = get_posts( array(
+                'numberposts' => -1,
+                'category_name'    => 'editor',
+                'orderby'     => 'date',
+                'order'       => 'ASC',
+                'post_type'   => 'post',
+                'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+            ) );
+
+            foreach( $posts as $post ){
+                setup_postdata($post);
+                ?>
+    
+                <article class="article v-col-lg-6 v-col-md-6 v-col">
+                    <div class="article-content">
+                        <div class="article-content__body">
+                            <a href="#" class="post__title"><?php the_title(); ?></a>
+                            <p class="post__text article-content__body-text">
+                                <?php the_field('editor_text'); ?>
+                            </p>
+                        </div>
+                        <div class="article-content__footer">
+                            <a href="#" class="post__category">
+                               <?php the_field('editor_category'); ?>
+                            </a>
+                            <span class="post__date">
+                               <?php the_field('editor_date'); ?>
+                            </span>
+                        </div>
+                    </div>
+                </article>
+
+                <?php
+            }
+
+            wp_reset_postdata(); // сброс
+            ?>
         
-        <article class="article v-col-lg-6 v-col-md-6 post-card-animation">
-            <div class="article-content">
-                <div class="article-content__body">
-                    <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                    <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                        Learn all about how you can...
-                    </p>
-                </div>
-                <div class="article-content__footer">
-                    <a href="#" class="post__category">Link Building</a>
-                    <span class="post__date">Feb 11, 2022</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="article v-col-lg-6 v-col-md-6 post-card-animation">
-            <div class="article-content">
-                <div class="article-content__body">
-                    <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                    <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                        Learn all about how you can...
-                    </p>
-                </div>
-                <div class="article-content__footer">
-                    <a href="#" class="post__category">Seo</a>
-                    <span class="post__date">Feb 11, 2022</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="article v-col-lg-6 v-col-md-6 post-card-animation">
-            <div class="article-content">
-                <div class="article-content__body">
-                    <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                    <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                        Learn all about how you can...
-                    </p>
-                </div>
-                <div class="article-content__footer">
-                    <a href="#" class="post__category">Seo</a>
-                    <span class="post__date">Feb 11, 2022</span>
-                </div>
-            </div>
-        </article>
     </div>
 
     <div class="swiper editor-post__slider hidden__desktop" data-slider-editor-posts>
         <div class="swiper-wrapper editor-post__container">
-            <div class="swiper-slide editor-post__side">
-                <article class="article article--col-2  post-card-animation">
-                    <div class="article-content">
-                        <div class="article-content__body">
-                            <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                            <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                                Learn all about how you can...
-                            </p>
+        <?php 
+            $posts = get_posts( array(
+                'numberposts' => -1,
+                'category_name'    => 'editor',
+                'orderby'     => 'date',
+                'order'       => 'ASC',
+                'post_type'   => 'post',
+                'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+            ) );
+
+            foreach( $posts as $post ){
+                setup_postdata($post);
+                ?>
+                <div class="swiper-slide editor-post__side">
+                    <article class="article v-col">
+                        <div class="article-content">
+                            <div class="article-content__body">
+                                <a href="#" class="post__title"><?php the_title(); ?></a>
+                                <p class="post__text article-content__body-text">
+                                   <?php the_field('editor_text'); ?>
+                                </p>
+                            </div>
+                            <div class="article-content__footer">
+                                <a href="#" class="post__category"><?php the_field('editor_category'); ?></a>
+                                <span class="post__date"><?php the_field('editor_date'); ?></span>
+                            </div>
                         </div>
-                        <div class="article-content__footer">
-                            <a href="#" class="post__category">Link Building</a>
-                            <span class="post__date">Feb 11, 2022</span>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <div class="swiper-slide editor-post__side">
-                <article class="article article--col-2  post-card-animation">
-                    <div class="article-content">
-                        <div class="article-content__body">
-                            <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                            <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                                Learn all about how you can...
-                            </p>
-                        </div>
-                        <div class="article-content__footer">
-                            <a href="#" class="post__category">Link Building</a>
-                            <span class="post__date">Feb 11, 2022</span>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <div class="swiper-slide editor-post__side">
-                <article class="article article--col-2  post-card-animation">
-                    <div class="article-content">
-                        <div class="article-content__body">
-                            <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                            <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                                Learn all about how you can...
-                            </p>
-                        </div>
-                        <div class="article-content__footer">
-                            <a href="#" class="post__category">Link Building</a>
-                            <span class="post__date">Feb 11, 2022</span>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <div class="swiper-slide editor-post__side">
-                <article class="article article--col-2  post-card-animation">
-                    <div class="article-content">
-                        <div class="article-content__body">
-                            <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                            <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                                Learn all about how you can...
-                            </p>
-                        </div>
-                        <div class="article-content__footer">
-                            <a href="#" class="post__category">Link Building</a>
-                            <span class="post__date">Feb 11, 2022</span>
-                        </div>
-                    </div>
-                </article>
-            </div>
+                    </article>
+                </div>
+
+                <?php
+            }
+
+            wp_reset_postdata(); // сброс
+            ?>
         </div>
         <div class="swiper-pagination editor-post__pagination"></div>
     </div>
 </section>
 
-<section class="main-post-seo container">
-    <div class="main-post-seo__block v-row">
-        <div class="main-post-seo__desc v-col-lg-6">
-            <span class="mark-round bg-red black">New</span>
-            <a href="#" class="post__category">Read on Blog</a>
-            <a href="#" class="main-post-seo__desc-title post__title">Join an interactive expert discussion with Spystealth</a>
-            <p class="main-post-seo__desc-text post__text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules. Learn all about how you can...</p>
-            <a class="button__read" href="#">Register Now</a>
-        </div>
-        <img src="<?php echo bloginfo('template_url'); ?>/assets/img/comp.png" class="main-post-seo__img v-col-lg-6" alt="logo" loading="lazy">
-    </div>
+<section class="main-post-event container">
+    <?php 
+        $posts = get_posts( array(
+            'numberposts' => 1,
+            'category_name'    => 'online-event',
+            'orderby'     => 'date',
+            'order'       => 'ASC',
+            'post_type'   => 'post',
+            'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+        ) );
+
+        foreach( $posts as $post ){
+            setup_postdata($post);
+            ?>
+            <div class="main-post-event__block v-row">
+                <div class="main-post-event__desc v-col-lg-6 v-col-md-12">
+                    <span class="mark-round bg-orange black"><?php the_field('online-event_span'); ?></span>
+                    <a href="#" class="main-post-event__desc-title post__title"><?php the_title(); ?></a>
+                    <p class="main-post-event__desc-text post__text"><?php the_field('online-event_text'); ?></p>
+                    <a class="button__register" href="#"><?php the_field('online-event_link'); ?></a>
+                </div>
+                <div class="main-post-event__img v-col-lg-6 v-col-md-12" alt="logo" loading="lazy">
+                <?php
+                    $image = get_field('online-event_img');
+
+                    if (!empty($image)): ?>
+                        <img 
+                        src="<?php echo $image['url']; ?>" 
+                        alt="<?php echo $image['alt']; ?>">
+                    <?php endif;?>
+                </div>
+            </div>
+        <?php
+        }
+
+        wp_reset_postdata(); // сброс
+        ?>
 </section>
 
 <section class="seo-category container">
@@ -334,143 +272,62 @@
             <a class="category-label" href="">What is SEO</a>
         </div>
     </div>
+
+    <div class="articles">
+        <div class="v-row">
+
+        <?php 
+        $posts = get_posts( array(
+            'numberposts' => -1,
+            'category_name'    => 'seo-category',
+            'orderby'     => 'date',
+            'order'       => 'ASC',
+            'post_type'   => 'post',
+            'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+        ) );
+
+        foreach( $posts as $post ){
+            setup_postdata($post);
+            ?>
+            <article class="article v-col-lg-4 v-col-md-6 v-col">
+                <div class="article-content">
+                    <div class="article-content__img bg-orange">
+                        <img class="article-content__img-img" src="<?php 
+                                if(has_post_thumbnail()) {
+                                    the_post_thumbnail_url();
+                                } else {
+                                    echo get_template_directory_uri() . '/assets/img/not-found.png';
+                                }
+                             ?>" alt="article-img" loading="lazy">
+                    </div>
+                    <div class="article-content__header">
+                        <a href="#" class="post__category"><?php the_field('article_category'); ?></a>
+                        <span class="post__time-to-read"><?php the_field('article_time'); ?></span>
+                    </div>
+                    <div class="article-content__body">
+                        <a href="#" class="post__title"><?php the_title(); ?></a>
+                        <p class="post__text article-content__body-text">
+                        <?php the_field('article_text'); ?>
+                        </p>
+                    </div>
+                    <div class="article-content__footer">
+                        <a href="#" class="post__author"><?php the_field('article_author'); ?></a>
+                        <span class="post__date"><?php the_field('article_date'); ?></span>
+                    </div>
+                </div>
+            </article>
+
+        <?php
+        }
+
+        wp_reset_postdata(); // сброс
+        ?>
+
+        
+    </div>
+</div>
 </section>
 
-<section class="articles container" data-animation-post-cards>
-    <div class="v-row">
-        <article class="article v-col-lg-4 v-col-md-12   post-card-animation">
-            <div class="article-content">
-                <div class="article-content__img bg-orange">
-                    <img class="article-content__img-img" src="<?php echo bloginfo('template_url'); ?>/assets/img/ar1.png" alt="article-img" loading="lazy">
-                </div>
-                <div class="article-content__header">
-                    <a href="#" class="post__category">Tactics & Troubleshooting</a>
-                    <span class="post__time-to-read">14min read</span>
-                </div>
-                <div class="article-content__body">
-                    <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                    <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                        Learn all about how you can...
-                    </p>
-                </div>
-                <div class="article-content__footer">
-                    <a href="#" class="post__author">Alina</a>
-                    <span class="post__date">Feb 11, 2022</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="article v-col-lg-4 v-col-md-12 post-card-animation">
-            <div class="article-content">
-                <div class="article-content__img bg-orange">
-                    <img class="article-content__img-img" src="<?php echo bloginfo('template_url'); ?>/assets/img/ar2.png" alt="article-img" loading="lazy">
-                </div>
-                <div class="article-content__header">
-                    <a href="#" class="post__category">Tactics & Troubleshooting</a>
-                    <span class="post__time-to-read">14min read</span>
-                </div>
-                <div class="article-content__body">
-                    <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                    <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                        Learn all about how you can...
-                    </p>
-                </div>
-                <div class="article-content__footer">
-                    <a href="#" class="post__author">Alina</a>
-                    <span class="post__date">Feb 11, 2022</span>
-                </div>
-            </div>
-        </article>
-    
-        <article class="article v-col-lg-4 v-col-md-12 post-card-animation">
-            <div class="article-content">
-                <div class="article-content__img bg-orange">
-                    <img class="article-content__img-img" src="<?php echo bloginfo('template_url'); ?>/assets/img/ar2.png" alt="article-img" loading="lazy">
-                </div>
-                <div class="article-content__header">
-                    <a href="#" class="post__category">Tactics & Troubleshooting</a>
-                    <span class="post__time-to-read">14min read</span>
-                </div>
-                <div class="article-content__body">
-                    <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                    <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                        Learn all about how you can...
-                    </p>
-                </div>
-                <div class="article-content__footer">
-                    <a href="#" class="post__author">Alina</a>
-                    <span class="post__date">Feb 11, 2022</span>
-                </div>
-            </div>
-        </article>
-    
-        <article class="article v-col-lg-4 v-col-md-12  post-card-animation">
-            <div class="article-content">
-                <div class="article-content__img bg-orange">
-                    <img class="article-content__img-img" src="<?php echo bloginfo('template_url'); ?>/assets/img/ar1.png" alt="article-img" loading="lazy">
-                </div>
-                <div class="article-content__header">
-                    <a href="#" class="post__category">Tactics & Troubleshooting</a>
-                    <span class="post__time-to-read">14min read</span>
-                </div>
-                <div class="article-content__body">
-                    <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                    <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                        Learn all about how you can...
-                    </p>
-                </div>
-                <div class="article-content__footer">
-                    <a href="#" class="post__author">Alina</a>
-                    <span class="post__date">Feb 11, 2022</span>
-                </div>
-            </div>
-        </article>
-    
-        <article class="article v-col-lg-4 v-col-md-12 post-card-animation">
-            <div class="article-content">
-                <div class="article-content__img bg-orange">
-                    <img class="article-content__img-img" src="<?php echo bloginfo('template_url'); ?>/assets/img/ar2.png" alt="article-img" loading="lazy">
-                </div>
-                <div class="article-content__header">
-                    <a href="#" class="post__category">Tactics & Troubleshooting</a>
-                    <span class="post__time-to-read">14min read</span>
-                </div>
-                <div class="article-content__body">
-                    <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                    <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                        Learn all about how you can...
-                    </p>
-                </div>
-                <div class="article-content__footer">
-                    <a href="#" class="post__author">Alina</a>
-                    <span class="post__date">Feb 11, 2022</span>
-                </div>
-            </div>
-        </article>
-    
-        <article class="article v-col-lg-4 v-col-md-12 post-card-animation">
-            <div class="article-content">
-                <div class="article-content__img bg-orange">
-                    <img class="article-content__img-img" src="<?php echo bloginfo('template_url'); ?>/assets/img/ar2.png" alt="article-img" loading="lazy">
-                </div>
-                <div class="article-content__header">
-                    <a href="#" class="post__category">Tactics & Troubleshooting</a>
-                    <span class="post__time-to-read">14min read</span>
-                </div>
-                <div class="article-content__body">
-                    <a href="#" class="post__title">How to Improve SEO Rankings in 11 Steps</a>
-                    <p class="post__text article-content__body-text">There are over 3.5 billion Google searches per day. If you want to stand out, you’ll need to play by Google’s rules.
-                        Learn all about how you can...
-                    </p>
-                </div>
-                <div class="article-content__footer">
-                    <a href="#" class="post__author">Alina</a>
-                    <span class="post__date">Feb 11, 2022</span>
-                </div>
-            </div>
-        </article>
-    </div>
-</section>
 
 <section class="main-form container">
     <div class="main-form__container v-row">
@@ -694,6 +551,10 @@
         </div>
     </div>
 </section>
+
+</main>
+
+
 <?php 
     get_footer();
 ?>

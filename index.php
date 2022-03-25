@@ -52,7 +52,7 @@
 </section>
 
 
-<section class="articles container" data-animation-post-cards>
+<section class="articles container">
     <div class="v-row">
 
     <?php 
@@ -336,13 +336,12 @@
             <p class="post__text black">
                 Want to know which websites saw the most traffic growth in your industry? Not sure why your SEO strategy doesn’t work? Or simply looking for SEO tips? Subscribe to our newsletter to receive updates on the content you care about.
             </p>
-            <?php echo do_shortcode('[contact-form-7 id="155" title="Subscribe form"]'); ?>
-            <label class="form-label black">By clicking “Subscribe” you agree to Spystealth
-                    <a class="white__link" target="_blank" href="#">Privacy Policy</a>
-                    and consent to Spystealth using your contact data for newsletter purposes
-                </label>
 
-                <?php echo do_shortcode('[contact-form-7 id="154" title="Контактная форма 1"]'); ?>
+            <?php echo do_shortcode('[contact-form-7 id="156" title="Subscibe form"]'); ?>
+            <div class="form-label black">By clicking “Subscribe” you agree to Spystealth
+                <a class="white__link" target="_blank" href="#">Privacy Policy</a>
+                and consent to Spystealth using your contact data for newsletter purposes
+            </div>
              <!-- <form class="form" method="post" data-form action="#">
                 <label for="email"></label>
                 <input class="form-input" type="email" name="email" id="email" placeholder="Your email" data-validate-field>
@@ -523,7 +522,12 @@
             <div class="modal__close" data-close-modal></div>
             <img src="<?php echo bloginfo('template_url'); ?>/assets/img/anytime.png" alt="anytime" loading="lazy">
             <p class="modal__content-title post__title">Join our newsletter</p>
-            <form class="modal__form form" method="post" data-form action="#">
+            <?php echo do_shortcode('[contact-form-7 id="156" title="Subscibe form"]'); ?>
+            <div class="form-label black">By clicking “Subscribe” you agree to Spystealth
+                <a class="white__link" target="_blank" href="#">Privacy Policy</a>
+                and consent to Spystealth using your contact data for newsletter purposes
+            </div>
+            <!-- <form class="modal__form form" method="post" data-form action="#">
                 <input class="modal__form-input form-input" type="email" name="email" id="email" placeholder="Your email" data-validate-field>
                 <span class="modal__form-error hidden form-error" data-input-error>Invalid value</span>
                 <button class="modal__form-button form-button button__subscribe" type="button" data-submit>Subscribe</button>
@@ -532,7 +536,7 @@
                     and consent to Spystealth using your contact data for newsletter purposes
                 </label>
                 <p class="modal__form-message hidden form-message" data-message>You are subscribed to our newsletter</p>
-            </form>
+            </form> -->
         </div>
     </div>
 </section>

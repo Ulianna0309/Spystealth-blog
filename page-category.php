@@ -25,107 +25,143 @@ Template Name: Page category
 
     <div class="category-content container">
         <div class="v-row">
-            <h1 class="category-content__title main__post black v-col">Link Building</h1>
-            <p class="category-content__text post__text v-col">Link building is the process of building links to your website. We'll help you with some tips to build links to your site.</p>
+            <h1 class="category-content__title main__post black v-col"><?php the_field('page-category_title'); ?></h1>
+            <p class="category-content__text post__text v-col"><?php the_field('page-category_text'); ?></p>
         </div>
     </div>
 
     <section class="articles container">
-    <div class="v-row">
+        <div class="v-row">
 
-    <?php 
-        $posts = get_posts( array(
-            'numberposts' => -1,
-            'category_name'    => 'article',
-            'orderby'     => 'date',
-            'order'       => 'ASC',
-            'post_type'   => 'post',
-            'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
-        ) );
+        <?php 
+            $posts = get_posts( array(
+                'numberposts' => -1,
+                'category_name'    => 'article',
+                'orderby'     => 'date',
+                'order'       => 'ASC',
+                'post_type'   => 'post',
+                'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+            ) );
 
-        foreach( $posts as $post ){
-            setup_postdata($post);
+            foreach( $posts as $post ){
+                setup_postdata($post);
+                ?>
+                <article class="article v-col-lg-4 v-col-md-6 v-col">
+                    <div class="article-content">
+                        <div class="article-content__img bg-orange">
+                            <img class="article-content__img-img" src="<?php 
+                                    if(has_post_thumbnail()) {
+                                        the_post_thumbnail_url();
+                                    } else {
+                                        echo get_template_directory_uri() . '/assets/img/not-found.png';
+                                    }
+                                ?>" alt="article-img" loading="lazy">
+                        </div>
+                        <div class="article-content__header">
+                            <a href="#" class="post__category"><?php the_field('article_category'); ?></a>
+                            <span class="post__time-to-read"><?php the_field('article_time'); ?></span>
+                        </div>
+                        <div class="article-content__body">
+                            <a href="#" class="post__title"><?php the_title(); ?></a>
+                            <p class="post__text article-content__body-text">
+                            <?php the_field('article_text'); ?>
+                            </p>
+                        </div>
+                        <div class="article-content__footer">
+                            <a href="#" class="post__author"><?php the_field('article_author'); ?></a>
+                            <span class="post__date"><?php the_field('article_date'); ?></span>
+                        </div>
+                    </div>
+                </article>
+
+            <?php
+            }
+
+            wp_reset_postdata(); // сброс
             ?>
-            <article class="article v-col-lg-4 v-col-md-6 v-col">
-                <div class="article-content">
-                    <div class="article-content__img bg-orange">
-                        <img class="article-content__img-img" src="<?php 
-                                if(has_post_thumbnail()) {
-                                    the_post_thumbnail_url();
-                                } else {
-                                    echo get_template_directory_uri() . '/assets/img/not-found.png';
-                                }
-                             ?>" alt="article-img" loading="lazy">
-                    </div>
-                    <div class="article-content__header">
-                        <a href="#" class="post__category"><?php the_field('article_category'); ?></a>
-                        <span class="post__time-to-read"><?php the_field('article_time'); ?></span>
-                    </div>
-                    <div class="article-content__body">
-                        <a href="#" class="post__title"><?php the_title(); ?></a>
-                        <p class="post__text article-content__body-text">
-                        <?php the_field('article_text'); ?>
-                        </p>
-                    </div>
-                    <div class="article-content__footer">
-                        <a href="#" class="post__author"><?php the_field('article_author'); ?></a>
-                        <span class="post__date"><?php the_field('article_date'); ?></span>
-                    </div>
-                </div>
-            </article>
 
-        <?php
+            
+        </div>
+    </section>
+
+    <div class="articles__load-more container" data-load-more-wrapper>
+        <button type="button" class="button__load-more" data-load-more tabindex="0">
+            load more posts
+        </button>
+        <ul class="articles__pagination">
+            <li class="articles__pagination-item">
+                <a href="" class="articles__pagination-button">1</a>
+            </li>
+            <li class="articles__pagination-item">
+                <a href="" class="articles__pagination-button">2</a>
+            </li>
+            <li class="articles__pagination-item">
+                <a href="" class="articles__pagination-button">3</a>
+            </li>
+            <li class="articles__pagination-item">
+                <a href="" class="articles__pagination-button">...</a>
+            </li>
+            <li class="articles__pagination-item">
+                <a href="" class="articles__pagination-button">123</a>
+            </li>
+        </ul>
+    </div>
+
+
+    <section class="boost container v-row">
+        <?php 
+            $posts = get_posts( array(
+                'numberposts' => 1,
+                'category_name'    => 'boost',
+                'orderby'     => 'date',
+                'order'       => 'ASC',
+                'post_type'   => 'post',
+                'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+            ) );
+
+            foreach( $posts as $post ){
+                setup_postdata($post);
+                ?>
+
+                <section class="boost container v-row">
+                    <div class="boost__img v-col-lg-6 v-col-md-12">
+                        <?php
+                            $image = get_field('boost_img');
+
+                            if (!empty($image)): ?>
+                                <img 
+                                src="<?php echo $image['url']; ?>" 
+                                alt="<?php echo $image['alt']; ?>">
+                            <?php endif;
+                        ?>
+                    </div>
+                    <div class="boost__desc v-col-lg-6 v-col-md-12">
+                        <h1 class="main__title black boost__title"><?php the_field('boost_title'); ?></h1>
+                        <button class="button__trial button__subscribe" type="button"><?php the_field('boost_link'); ?></button>
+                    </div>
+                </section>
+
+                <?php
         }
 
         wp_reset_postdata(); // сброс
         ?>
+    </section>
 
-        
-    </div>
-</section>
-
-<div class="articles__load-more container" data-load-more-wrapper>
-    <button type="button" class="button__load-more" data-load-more tabindex="0">
-        load more posts
-    </button>
-    <ul class="articles__pagination">
-        <li class="articles__pagination-item">
-            <a href="" class="articles__pagination-button">1</a>
-        </li>
-        <li class="articles__pagination-item">
-            <a href="" class="articles__pagination-button">2</a>
-        </li>
-        <li class="articles__pagination-item">
-            <a href="" class="articles__pagination-button">3</a>
-        </li>
-        <li class="articles__pagination-item">
-            <a href="" class="articles__pagination-button">...</a>
-        </li>
-        <li class="articles__pagination-item">
-            <a href="" class="articles__pagination-button">123</a>
-        </li>
-    </ul>
-</div>
-
-
-<section class="boost container v-row">
-    <div class="boost__img v-col-lg-6 v-col-md-12">
-        <?php
-            $image = get_field('boost_img');
-
-            if (!empty($image)): ?>
-                <img 
-                src="<?php echo $image['url']; ?>" 
-                alt="<?php echo $image['alt']; ?>">
-            <?php endif;
-        ?>
-    </div>
-    <div class="boost__desc v-col-lg-6 v-col-md-12">
-        <h1 class="main__title black boost__title"><?php the_field('boost_title'); ?></h1>
-        <button class="button__trial button__subscribe" type="button"><?php the_field('boost_link'); ?></button>
-    </div>
-</section>
-
+    <section class="modal" data-modal-wrap>
+        <div class="modal__container container" data-modal="success-send">
+            <div class="modal__content">
+                <div class="modal__close" data-close-modal></div>
+                <img src="<?php echo bloginfo('template_url'); ?>/assets/img/anytime.png" alt="anytime" loading="lazy">
+                <p class="modal__content-title post__title">Join our newsletter</p>
+                <?php echo do_shortcode('[contact-form-7 id="156" title="Subscibe form"]'); ?>
+                <div class="form-label black">By clicking “Subscribe” you agree to Spystealth
+                    <a class="white__link" target="_blank" href="#">Privacy Policy</a>
+                    and consent to Spystealth using your contact data for newsletter purposes
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 </main>

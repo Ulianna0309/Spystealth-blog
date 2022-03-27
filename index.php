@@ -342,17 +342,6 @@
                 <a class="white__link" target="_blank" href="#">Privacy Policy</a>
                 and consent to Spystealth using your contact data for newsletter purposes
             </div>
-             <!-- <form class="form" method="post" data-form action="#">
-                <label for="email"></label>
-                <input class="form-input" type="email" name="email" id="email" placeholder="Your email" data-validate-field>
-                <span class="hidden form-error" data-input-error>Invalid value</span>
-                <button class="form-button button__subscribe" type="button" data-submit>Subscribe</button>
-                <label class="form-label black">By clicking “Subscribe” you agree to Spystealth
-                    <a class="white__link" target="_blank" href="#">Privacy Policy</a>
-                    and consent to Spystealth using your contact data for newsletter purposes
-                </label>
-                <p class="hidden form-message" data-message>You are subscribed to our newsletter</p>
-            </form> -->
         </div>
         <img class="main-form__img v-col-lg-5" src="<?php echo bloginfo('template_url'); ?>/assets/img/anytime.png" alt="anytime" loading="lazy">
     </div>
@@ -427,22 +416,46 @@
     </div>
 </section>
 
-<section class="boost container v-row">
-    <div class="boost__img v-col-lg-6 v-col-md-12">
-        <?php
-            $image = get_field('boost_img');
 
-            if (!empty($image)): ?>
-                <img 
-                src="<?php echo $image['url']; ?>" 
-                alt="<?php echo $image['alt']; ?>">
-            <?php endif;
-        ?>
-    </div>
-    <div class="boost__desc v-col-lg-6 v-col-md-12">
-        <h1 class="main__title black boost__title"><?php the_field('boost_title'); ?></h1>
-        <button class="button__trial button__subscribe" type="button"><?php the_field('boost_link'); ?></button>
-    </div>
+
+<section class="boost container v-row">
+    <?php 
+        $posts = get_posts( array(
+            'numberposts' => 1,
+            'category_name'    => 'boost',
+            'orderby'     => 'date',
+            'order'       => 'ASC',
+            'post_type'   => 'post',
+            'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+        ) );
+
+        foreach( $posts as $post ){
+            setup_postdata($post);
+            ?>
+
+            <section class="boost container v-row">
+                <div class="boost__img v-col-lg-6 v-col-md-12">
+                    <?php
+                        $image = get_field('boost_img');
+
+                        if (!empty($image)): ?>
+                            <img 
+                            src="<?php echo $image['url']; ?>" 
+                            alt="<?php echo $image['alt']; ?>">
+                        <?php endif;
+                    ?>
+                </div>
+                <div class="boost__desc v-col-lg-6 v-col-md-12">
+                    <h1 class="main__title black boost__title"><?php the_field('boost_title'); ?></h1>
+                    <button class="button__trial button__subscribe" type="button"><?php the_field('boost_link'); ?></button>
+                </div>
+            </section>
+
+            <?php
+    }
+
+    wp_reset_postdata(); // сброс
+    ?>
 </section>
 
 <section class="seo-category container content-category">
@@ -527,16 +540,6 @@
                 <a class="white__link" target="_blank" href="#">Privacy Policy</a>
                 and consent to Spystealth using your contact data for newsletter purposes
             </div>
-            <!-- <form class="modal__form form" method="post" data-form action="#">
-                <input class="modal__form-input form-input" type="email" name="email" id="email" placeholder="Your email" data-validate-field>
-                <span class="modal__form-error hidden form-error" data-input-error>Invalid value</span>
-                <button class="modal__form-button form-button button__subscribe" type="button" data-submit>Subscribe</button>
-                <label class="modal__form-label form-label">By clicking “Subscribe” you agree to Spystealth
-                    <a class="white__link" target="_blank" href="#">Privacy Policy</a>
-                    and consent to Spystealth using your contact data for newsletter purposes
-                </label>
-                <p class="modal__form-message hidden form-message" data-message>You are subscribed to our newsletter</p>
-            </form> -->
         </div>
     </div>
 </section>

@@ -17,7 +17,7 @@ Template Name: Page category
                 </a>
             </li>
             <li class="breadcrumbs__current-item">
-               <?php the_archive_title(); ?>
+            <?php the_archive_title(); ?>
             </li>
         </ul>
     </nav>
@@ -25,7 +25,7 @@ Template Name: Page category
 
     <div class="category-content container">
         <div class="v-row">
-            <h1 class="category-content__title main__post black v-col"><?php the_field('page-category_title'); ?></h1>
+            <h1 class="category-content__title main__post black v-col"><?php the_title(); ?></h1>
             <p class="category-content__text post__text v-col"><?php the_field('page-category_text'); ?></p>
         </div>
     </div>
@@ -36,7 +36,7 @@ Template Name: Page category
         <?php 
             $posts = get_posts( array(
                 'numberposts' => -1,
-                'category_name'    => 'article',
+                'category_name'    => 'seo-category',
                 'orderby'     => 'date',
                 'order'       => 'ASC',
                 'post_type'   => 'post',

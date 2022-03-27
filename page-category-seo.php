@@ -1,6 +1,6 @@
 <?php 
 /*
-Template Name: Author page
+Template Name: Page category seo
 */
 ?>
 
@@ -8,26 +8,27 @@ Template Name: Author page
     get_header();
 ?>
 
-<main class="main-content author-page">
-    <div class="author-content container">
-        <div class="author-content__container v-row">
-        <div class="author-content__img">
-            <?php
-                $image = get_field('author-page_img');
+<main class="main-content category-page">
+    <nav class="breadcrumbs container">
+        <ul class="breadcrumbs__list">
+            <li class="breadcrumbs__item">
+                <a href="#" class="breadcrumbs__link">
+                    Home
+                </a>
+            </li>
+            <li class="breadcrumbs__current-item">
+            <?php the_archive_title(); ?>
+            </li>
+        </ul>
+    </nav>
 
-                if (!empty($image)): ?>
-                    <img 
-                    src="<?php echo $image['url']; ?>" 
-                    alt="<?php echo $image['alt']; ?>">
-                <?php endif;
-            ?>
-        </div>
-            <h1 class="author-content__title main__title black v-col"><?php the_field('author-page_name'); ?></h1>
-            <h3 class="author-content__subtitle black v-col"><?php the_field('author-page_prof'); ?></h3>
-            <p class="author-content__text post__text v-col"><?php the_field('author-page_text'); ?></p>
+
+    <div class="category-content container">
+        <div class="v-row">
+            <h1 class="category-content__title main__post black v-col"><?php the_field('page-category_title'); ?></h1>
+            <p class="category-content__text post__text v-col"><?php the_field('page-category_text'); ?></p>
         </div>
     </div>
-
 
     <section class="articles container">
         <div class="v-row">
@@ -79,6 +80,7 @@ Template Name: Author page
             wp_reset_postdata(); // сброс
             ?>
 
+            
         </div>
     </section>
 
@@ -107,7 +109,7 @@ Template Name: Author page
 
 
     <section class="boost container v-row">
-            <?php 
+        <?php 
             $posts = get_posts( array(
                 'numberposts' => 1,
                 'category_name'    => 'boost',
@@ -145,6 +147,7 @@ Template Name: Author page
         wp_reset_postdata(); // сброс
         ?>
     </section>
+
 </main>
 
 <?php 

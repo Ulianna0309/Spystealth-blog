@@ -21,25 +21,33 @@
             ?>
 
             <div class="main-post__block v-row">
+                <?php
+                    $category = get_the_category();
+                    $category_name = $category[0]->name;
+                    $category_link = get_category_link( $category[0] )
+                ?>
+            
                 <div class="main-post__desc v-col-lg-5 v-col-md-12 v-col">
-                    <a href="#" class="main-post__desc-title post__title"><?php the_title(); ?></a>
+                    <a href="<?php echo get_permalink(); ?>" class="main-post__desc-title post__title"><?php the_title(); ?></a>
                     <p class="main-post__desc-text post__text"><?php the_field('main-post_text'); ?></p>
                     <div class="main-post__desc-view">
-                        <span class="post__date"><?php the_field('main-post_date'); ?></span>
-                        <a href="#" class="post__category"><?php the_field('main-post_category'); ?></a>
+                        <span class="post__date"><?php the_time('M j, Y'); ?></span>
+                        <a href="<?= $category_link?>" class="post__category">
+                            <?= $category_name?>
+                        </a>
                         <span class="post__time-to-read"><?php the_field('main-post_time'); ?></span>
                     </div>
                 </div>
-                <div class="main-post__img v-col-lg-5 v-col-md-12 v-col">
-                <?php
-                    $image = get_field('main-post_img');
+                <a href="<?php echo get_permalink(); ?>" class="main-post__img v-col-lg-5 v-col-md-12 v-col">
+                    <?php
+                        $image = get_field('main-post_img');
 
-                    if (!empty($image)): ?>
-                        <img 
-                        src="<?php echo $image['url']; ?>" 
-                        alt="<?php echo $image['alt']; ?>">
+                        if (!empty($image)): ?>
+                            <img 
+                            src="<?php echo $image['url']; ?>" 
+                            alt="<?php echo $image['alt']; ?>">
                     <?php endif;?>
-                </div>
+                </a>
             </div>
 
         <?php
@@ -69,29 +77,39 @@
             setup_postdata($post);
             ?>
             <article class="article v-col-lg-4 v-col-md-6 v-col">
+                <?php
+                    $category = get_the_category();
+                    $category_name = $category[0]->name;
+                    $category_link = get_category_link( $category[0] )
+                ?>
                 <div class="article-content">
                     <div class="article-content__img bg-orange">
-                        <img class="article-content__img-img" src="<?php 
+                        <a href="<?php echo get_permalink(); ?>">
+                            <img class="article-content__img-img" src="<?php 
                                 if(has_post_thumbnail()) {
                                     the_post_thumbnail_url();
                                 } else {
                                     echo get_template_directory_uri() . '/assets/img/not-found.png';
                                 }
-                             ?>" alt="article-img" loading="lazy">
+                                ?>" alt="article-img" loading="lazy">
+                        </a>
                     </div>
                     <div class="article-content__header">
-                        <a href="#" class="post__category"><?php the_field('article_category'); ?></a>
+                        <a href="<?= $category_link?>" class="post__category">
+                            <?= $category_name?>
+                        </a>
+                        <!-- <a href="#" class="post__category"><?php the_field('article_category'); ?></a> -->
                         <span class="post__time-to-read"><?php the_field('article_time'); ?></span>
                     </div>
                     <div class="article-content__body">
-                        <a href="#" class="post__title"><?php the_title(); ?></a>
+                        <a href="<?php echo get_permalink(); ?>" class="post__title"><?php the_title(); ?></a>
                         <p class="post__text article-content__body-text">
-                        <?php the_field('article_text'); ?>
+                             <?php the_field('article_text'); ?>
                         </p>
                     </div>
                     <div class="article-content__footer">
-                        <a href="#" class="post__author"><?php the_field('article_author'); ?></a>
-                        <span class="post__date"><?php the_field('article_date'); ?></span>
+                        <div href="#" class="post__author"><?php the_author_posts_link(); ?></div>
+                        <span class="post__date"><?php the_time('M j, Y'); ?></span>
                     </div>
                 </div>
             </article>
@@ -151,7 +169,7 @@
                 <article class="article v-col-lg-6 v-col-md-6 v-col">
                     <div class="article-content">
                         <div class="article-content__body">
-                            <a href="#" class="post__title"><?php the_title(); ?></a>
+                            <a href="<?php echo get_permalink(); ?>" class="post__title"><?php the_title(); ?></a>
                             <p class="post__text article-content__body-text">
                                 <?php the_field('editor_text'); ?>
                             </p>
@@ -161,7 +179,7 @@
                                <?php the_field('editor_category'); ?>
                             </a>
                             <span class="post__date">
-                               <?php the_field('editor_date'); ?>
+                                <?php the_time('M j, Y'); ?>
                             </span>
                         </div>
                     </div>
@@ -194,14 +212,14 @@
                     <article class="article v-col">
                         <div class="article-content">
                             <div class="article-content__body">
-                                <a href="#" class="post__title"><?php the_title(); ?></a>
+                                <a href="<?php echo get_permalink(); ?>" class="post__title"><?php the_title(); ?></a>
                                 <p class="post__text article-content__body-text">
                                    <?php the_field('editor_text'); ?>
                                 </p>
                             </div>
                             <div class="article-content__footer">
                                 <a href="#" class="post__category"><?php the_field('editor_category'); ?></a>
-                                <span class="post__date"><?php the_field('editor_date'); ?></span>
+                                <span class="post__date"><?php the_time('M j, Y'); ?></span>
                             </div>
                         </div>
                     </article>
@@ -234,9 +252,9 @@
             <div class="main-post-event__block v-row">
                 <div class="main-post-event__desc v-col-lg-6 v-col-md-12">
                     <span class="mark-round bg-orange black"><?php the_field('online-event_span'); ?></span>
-                    <a href="#" class="main-post-event__desc-title post__title"><?php the_title(); ?></a>
+                    <a href="<?php echo get_permalink(); ?>" class="main-post-event__desc-title post__title"><?php the_title(); ?></a>
                     <p class="main-post-event__desc-text post__text"><?php the_field('online-event_text'); ?></p>
-                    <a class="button__register" href="#"><?php the_field('online-event_link'); ?></a>
+                    <a class="button__register" href="<?php echo get_permalink(); ?>"><?php the_field('online-event_link'); ?></a>
                 </div>
                 <div class="main-post-event__img v-col-lg-6 v-col-md-12" alt="logo" loading="lazy">
                 <?php
@@ -305,14 +323,14 @@
                         <span class="post__time-to-read"><?php the_field('article_time'); ?></span>
                     </div>
                     <div class="article-content__body">
-                        <a href="#" class="post__title"><?php the_title(); ?></a>
+                        <a href="<?php echo get_permalink(); ?>" class="post__title"><?php the_title(); ?></a>
                         <p class="post__text article-content__body-text">
                         <?php the_field('article_text'); ?>
                         </p>
                     </div>
                     <div class="article-content__footer">
                         <a href="#" class="post__author"><?php the_field('article_author'); ?></a>
-                        <span class="post__date"><?php the_field('article_date'); ?></span>
+                        <span class="post__date"><?php the_time('M j, Y'); ?></span>
                     </div>
                 </div>
             </article>
@@ -395,14 +413,14 @@
                         <span class="post__time-to-read"><?php the_field('article_time'); ?></span>
                     </div>
                     <div class="article-content__body">
-                        <a href="#" class="post__title"><?php the_title(); ?></a>
+                        <a href="<?php echo get_permalink(); ?>" class="post__title"><?php the_title(); ?></a>
                         <p class="post__text article-content__body-text">
                         <?php the_field('article_text'); ?>
                         </p>
                     </div>
                     <div class="article-content__footer">
                         <a href="#" class="post__author"><?php the_field('article_author'); ?></a>
-                        <span class="post__date"><?php the_field('article_date'); ?></span>
+                        <span class="post__date"><?php the_time('M j, Y'); ?></span>
                     </div>
                 </div>
             </article>
@@ -507,14 +525,14 @@
                         <span class="post__time-to-read"><?php the_field('article_time'); ?></span>
                     </div>
                     <div class="article-content__body">
-                        <a href="#" class="post__title"><?php the_title(); ?></a>
+                        <a href="<?php echo get_permalink(); ?>" class="post__title"><?php the_title(); ?></a>
                         <p class="post__text article-content__body-text">
                         <?php the_field('article_text'); ?>
                         </p>
                     </div>
                     <div class="article-content__footer">
                         <a href="#" class="post__author"><?php the_field('article_author'); ?></a>
-                        <span class="post__date"><?php the_field('article_date'); ?></span>
+                        <span class="post__date"><?php the_time('M j, Y'); ?></span>
                     </div>
                 </div>
             </article>
@@ -524,22 +542,6 @@
 
         wp_reset_postdata(); // сброс
         ?>
-        </div>
-    </div>
-</section>
-
-
-<section class="modal" data-modal-wrap>
-    <div class="modal__container container" data-modal="success-send">
-        <div class="modal__content">
-            <div class="modal__close" data-close-modal></div>
-            <img src="<?php echo bloginfo('template_url'); ?>/assets/img/anytime.png" alt="anytime" loading="lazy">
-            <p class="modal__content-title post__title">Join our newsletter</p>
-            <?php echo do_shortcode('[contact-form-7 id="156" title="Subscibe form"]'); ?>
-            <div class="form-label black">By clicking “Subscribe” you agree to Spystealth
-                <a class="white__link" target="_blank" href="#">Privacy Policy</a>
-                and consent to Spystealth using your contact data for newsletter purposes
-            </div>
         </div>
     </div>
 </section>

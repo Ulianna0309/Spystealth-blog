@@ -17,7 +17,7 @@ Template Name: Page category
                 </a>
             </li>
             <li class="breadcrumbs__current-item">
-                Seo
+            <?php the_archive_title(); ?>
             </li>
         </ul>
     </nav>
@@ -147,22 +147,6 @@ Template Name: Page category
         wp_reset_postdata(); // сброс
         ?>
     </section>
-
-    <section class="modal" data-modal-wrap>
-        <div class="modal__container container" data-modal="success-send">
-            <div class="modal__content">
-                <div class="modal__close" data-close-modal></div>
-                <img src="<?php echo bloginfo('template_url'); ?>/assets/img/anytime.png" alt="anytime" loading="lazy">
-                <p class="modal__content-title post__title">Join our newsletter</p>
-                <?php echo do_shortcode('[contact-form-7 id="156" title="Subscibe form"]'); ?>
-                <div class="form-label black">By clicking “Subscribe” you agree to Spystealth
-                    <a class="white__link" target="_blank" href="#">Privacy Policy</a>
-                    and consent to Spystealth using your contact data for newsletter purposes
-                </div>
-            </div>
-        </div>
-    </section>
-
 
 </main>
 

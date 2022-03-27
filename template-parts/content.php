@@ -1,44 +1,33 @@
-<?php 
-/*
-Template Name: Blog page
-*/
-?>
-
-<?php 
-    get_header();
-?>
-
 <main class="main-content blog-page">
-    <section class="blog-page-intro container">
-        <div class="blog-page-intro__container v-row">
-            <div class="blog-page-intro__desc v-col-lg-6 v-col-md-6">
-                <div class="blog-page-intro__category">
-                    <a class="category-label" href=""><?php the_field('blog-page_intro-category'); ?></a> 
-                </div>
-                <h1 class="main__title black"><?php the_field('blog-page_intro-title'); ?></h1>
-                <button class="button__subscribe blog-page-intro__button" type="button"><?php the_field('blog-page_intro-link'); ?></button>
-                <div class="article-content__footer">
-                    <a href="#" class="post__author black"><?php the_field('blog-page_intro-author'); ?></a> 
-                    <span class="post__date black"><?php the_field('blog-page_intro-date'); ?></span>
-                    <span class="post__time-to-read black"><?php the_field('blog-page_intro-time'); ?></span>
-                </div>
-            </div>
-            <div class="blog-page-intro__img v-col-lg-6 v-col-md-6">
-                <?php
-                    $image = get_field('blog-page_intro-img');
+	<section class="blog-page-intro container">
+		<div class="blog-page-intro__container v-row">
+			<div class="blog-page-intro__desc v-col-lg-6 v-col-md-6">
+				<div class="blog-page-intro__category">
+					<a class="category-label" href=""><?php the_field('blog-page_intro-category'); ?></a> 
+				</div>
+				<h1 class="main__title black"><?php the_title(); ?></h1>
+				<button class="button__subscribe blog-page-intro__button" type="button"><?php the_field('blog-page_intro-link'); ?></button>
+				<div class="article-content__footer">
+					<a href="#" class="post__author black"><?php the_field('blog-page_intro-author'); ?></a> 
+					<span class="post__date black"><?php the_field('blog-page_intro-date'); ?></span>
+					<span class="post__time-to-read black"><?php the_field('blog-page_intro-time'); ?></span>
+				</div>
+			</div>
+			<div class="blog-page-intro__img v-col-lg-6 v-col-md-6">
+				<?php
+					$image = get_field('blog-page_intro-img');
 
-                    if (!empty($image)): ?>
-                        <img 
-                        src="<?php echo $image['url']; ?>" 
-                        alt="<?php echo $image['alt']; ?>">
-                    <?php endif;
-                ?>
-            </div>
-        </div>
-    </section>
+					if (!empty($image)): ?>
+						<img 
+						src="<?php echo $image['url']; ?>" 
+						alt="<?php echo $image['alt']; ?>">
+					<?php endif;
+				?>
+			</div>
+		</div>
+	</section>
 
-
-    <section class="blog-page-post container">
+	<section class="blog-page-post container">
         <div class="v-row">
             <div class="blog-page-post__aside v-col-lg-3">
                 <aside class="table-of-content v-col-lg-12" data-table-of-content>
@@ -65,8 +54,36 @@ Template Name: Blog page
                     </ul>
                 </aside>
             </div>
-            <div class="blog-page-post__post v-col-lg-9 v-col-md-12">
-                <article class="blog-page-post__article">
+            <div class="blog-page-post__post v-col-lg-9 v-col-md-12 v-col">
+			    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+					<div class="entry-content blog-page-post__article">
+						<?php
+						the_content(sprintf(
+								wp_kses(
+									/* translators: %s: Name of current post. Only visible to screen readers */
+									__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'spytealth' ),
+									array(
+										'span' => array(
+											'class' => array(),
+										),
+									)
+								),
+								wp_kses_post( get_the_title() )
+							)
+						);
+
+						wp_link_pages(
+							array(
+								'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'spytealth' ),
+								'after'  => '</div>',
+							)
+						);
+						?>
+					</div><!-- .entry-content -->
+	            </article><!-- #post-<?php the_ID(); ?> -->
+
+
+                <!-- <article class="blog-page-post__article">
                     <p><?php the_field('blog-page_post-text-start'); ?></p>
                     <ul class="blog-page-post__article-list"> 
                         <li class="blog-page-post__article-list--item"><?php the_field('blog-page_post-list-item'); ?></li> 
@@ -105,7 +122,7 @@ Template Name: Blog page
                             </div>
                         </div>
                     </div>
-                </article>
+                </article> -->
         
         
                 <div class="social-links">
@@ -189,12 +206,4 @@ Template Name: Blog page
     wp_reset_postdata(); // сброс
     ?>
 </section>
-
-
-
-
 </main>
-
-<?php 
-    get_footer();
-?>

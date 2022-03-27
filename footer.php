@@ -2,79 +2,59 @@
         <div class="footer__links v-row">
             <div class="footer__block v-col-lg-3 v-col-md-6 v-col">
                 <h3 class="footer__block-title">WE ARE BEST AT</h3>
-                <ul class="footer__block-list">
-                    <li class="footer__block-item">
-                        <a class="footer__block-item--link" href="#">Facebook Tracking App</a>
-                    </li>
-                    <li class="footer__block-item">
-                        <a class="footer__block-item--link" href="#">Call Tracker & Blocker</a>
-                    </li>
-                    <li class="footer__block-item">
-                        <a class="footer__block-item--link" href="#">SMS & Text Messages Tracking App</a>
-                    </li>
-                    <li class="footer__block-item">
-                        <a class="footer__block-item--link" href="#">Email Tracking App</a>
-                    </li>
-                    <li class="footer__block-item">
-                        <a class="footer__block-item--link" href="#">KIK Tracking App</a>
-                    </li>
-                    <li class="footer__block-item">
-                        <a class="footer__block-item--link" href="#">Line Tracking App</a>
-                    </li>
-                    <li class="footer__block-item">
-                        <a class="footer__block-item--link" href="#">Location Tracking App</a>
-                    </li>
-                    <li class="footer__block-item">
-                        <a class="footer__block-item--link" href="#">Viber Tracking App</a>
-                    </li>
-                </ul>
+                <?php 
+                    wp_nav_menu( [
+                        'menu'            => 'We-are-best-at', 
+                        'container'       => false, 
+                        'menu_class'      => 'footer__block-list', 
+                        'echo'            => true,
+                        'fallback_cb'     => 'wp_page_menu',
+                        'items_wrap'      => '<ul class="footer__block-list">%3$s</ul>',
+                        'depth'           => 1
+                    ] );
+                ?>
             </div>
             <div class="footer__block v-col-lg-3 v-col-md-6 v-col">
                 <h3 class="footer__block-title">SITE MAP</h3>
-                <ul class="footer__block-list">
-                    <li class="footer__block-item">
-                        <a class="footer__block-item--link" href="#">Home</a>
-                    </li>
-                    <li class="footer__block-item">
-                        <a class="footer__block-item--link" href="#">About Us</a>
-                    </li>
-                    <li class="footer__block-item">
-                        <a class="footer__block-item--link" href="#">
-                            Free registration
-                        </a>
-                    </li>
-                    <li class="footer__block-item">
-                        <a class="footer__block-item--link" href="#">Support</a>
-                    </li>
-                </ul>
+                <?php 
+                    wp_nav_menu( [
+                        'menu'            => 'Site-map', 
+                        'container'       => false, 
+                        'menu_class'      => 'footer__block-list', 
+                        'echo'            => true,
+                        'fallback_cb'     => 'wp_page_menu',
+                        'items_wrap'      => '<ul class="footer__block-list">%3$s</ul>',
+                        'depth'           => 1
+                    ] );
+                ?>
             </div>
             <div class="footer__block v-col-lg-3 v-col-md-6 v-col">
                   <h3 class="footer__block-title">PRIVACY</h3>
-                  <ul class="footer__block-list">
-                      <li class="footer__block-item">
-                           <a class="footer__block-item--link" href="#">Terms of Use</a>
-                      </li>
-                      <li class="footer__block-item">
-                           <a class="footer__block-item--link" href="#">Privacy Policy</a>
-                      </li>
-                      <li class="footer__block-item">
-                           <a class="footer__block-item--link" href="#">Refund Policy</a>
-                      </li>
-                  </ul>
+                  <?php 
+                        wp_nav_menu( [
+                            'menu'            => 'Privacy', 
+                            'container'       => false, 
+                            'menu_class'      => 'footer__block-list', 
+                            'echo'            => true,
+                            'fallback_cb'     => 'wp_page_menu',
+                            'items_wrap'      => '<ul class="footer__block-list">%3$s</ul>',
+                            'depth'           => 1
+                        ] );
+                    ?>
             </div>
             <div class="footer__block v-col-lg-3 v-col-md-6 v-col">
                <h3 class="footer__block-title">WORK WITH US</h3>
-               <ul class="footer__block-list">
-                   <li class="footer__block-item">
-                        <a class="footer__block-item--link" href="#">Affiliate Program</a>
-                   </li>
-                   <li class="footer__block-item">
-                        <a class="footer__block-item--link" href="#">WhiteLabeling</a>
-                   </li>
-                   <li class="footer__block-item">
-                        <a class="footer__block-item--link" href="#">Refund Policy</a>
-                   </li>
-               </ul>
+               <?php 
+                    wp_nav_menu( [
+                        'menu'            => 'Work-with-us', 
+                        'container'       => false, 
+                        'menu_class'      => 'footer__block-list', 
+                        'echo'            => true,
+                        'fallback_cb'     => 'wp_page_menu',
+                        'items_wrap'      => '<ul class="footer__block-list">%3$s</ul>',
+                        'depth'           => 1
+                    ] );
+                ?>
             </div>
         </div>
         <div class="footer__card">

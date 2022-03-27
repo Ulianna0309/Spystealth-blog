@@ -20,52 +20,31 @@
 <body class="light-theme">
   <header class="header" data-main-menu-block>
     <div class="header-top container" data-main-menu>
-        <div class="header-top__menu" data-header-menu>
-          <nav class="header-top__nav">
-            <ul class="header-top__list">
-              <li class="header-top__menu-item">
-                <a class="header-top__menu-item--link" href="#">Home</a>
-              </li>
-              <li class="header-top__menu-item">
-                <a class="header-top__menu-item--link" href="#">Features</a>
-              </li>
-              <li class="header-top__menu-item">
-                <a class="header-top__menu-item--link" href="#">Compatibility</a>
-              </li>
-              <li class="header-top__menu-item">
-                <a class="header-top__menu-item--link" href="#">Free registration</a>
-              </li>
-              <li class="header-top__menu-item">
-                <a class="header-top__menu-item--link" href="#">Support</a>
-              </li>
-              <li class="header-top__menu-item">
-                <a class="header-top__menu-item--link" href="#">About Us</a>
-              </li>
-            </ul>
-            
-            <ul class="header-top__list header-top__list--mobile ">
-              <li class="header-main__list-item ">
-                <a href="" class="header-main__list-item--link">SEO</a>
-              </li>
-              <li class="header-main__list-item">
-                <a href="" class="header-main__list-item--link">Advanced SEO</a>
-              </li>
-              <li class="header-main__list-item">
-                <a href="" class="header-main__list-item--link">Content</a>
-              </li>
-            </ul>
-            
-            <div class="header-top__buttons">
-              <a href="#" class="button__search">
-                <svg class="button__search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z"/></svg>
-              </a>
-              <button type="button" class="button__subscribe" data-subscribe>
-                Subscribe
-              </button>
-            </div>
-          </nav>
-        </div>
+      <div class="header-top__menu" data-header-menu>
+        <nav class="header-top__nav">
+          <?php 
+              wp_nav_menu( [
+                  'menu'            => 'Menu-top', 
+                  'container'       => false, 
+                  'menu_class'      => 'header-top__list', 
+                  'echo'            => true,
+                  'fallback_cb'     => 'wp_page_menu',
+                  'items_wrap'      => '<ul class="header-top__list">%3$s</ul>',
+                  'depth'           => 1
+              ] );
+          ?>
+
+          <div class="header-top__buttons">
+            <a href="#" class="button__search">
+              <svg class="button__search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z"/></svg>
+            </a>
+            <button type="button" class="button__subscribe" data-subscribe>
+              Subscribe
+            </button>
+          </div>
+        </nav>
       </div>
+    </div>
     
 
     <div class="header-main container">
@@ -77,20 +56,21 @@
           <p class="header-main__logo-title--text">Phone Tracking Software</p>
         </div>
       </div>
-      
-      <nav class="header-main__nav">
-        <ul class="header-main__list">
-          <li class="header-main__list-item">
-            <a href="" class="header-main__list-item--link">SEO</a>
-          </li>
-          <li class="header-main__list-item">
-            <a href="" class="header-main__list-item--link">Advanced SEO</a>
-          </li>
-          <li class="header-main__list-item">
-            <a href="" class="header-main__list-item--link">Content</a>
-          </li>
-        </ul>
+
+      <nav class="header-top__nav header-main__nav-desktop">
+      <?php 
+            wp_nav_menu( [
+                'menu'            => 'Main-menu', 
+                'container'       => false, 
+                'menu_class'      => 'header-top__list', 
+                'echo'            => true,
+                'fallback_cb'     => 'wp_page_menu',
+                'items_wrap'      => '<ul class="header-top__list">%3$s</ul>',
+                'depth'           => 1
+            ] );
+        ?>
       </nav>
+      
       
       <div class="header-main__buttons ">
         <a href="#" class="button__search">

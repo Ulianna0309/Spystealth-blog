@@ -356,7 +356,6 @@
         </div>
     </section>
 
-
     <section class="main-form container">
         <div class="main-form__container v-row">
             <div class="main-form__desc v-col-lg-5">
@@ -460,7 +459,6 @@
             </div>
         </div>
     </section>
-
 
 
     <section class="boost container v-row">

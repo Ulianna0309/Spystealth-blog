@@ -25,19 +25,17 @@ $category = get_queried_object();
 
                     <section class="boost container v-row">
                         <div class="boost__img v-col-lg-6 v-col-md-12">
-                            <?php
-                                $image = get_field('boost_img');
-
-                                if (!empty($image)): ?>
-                                    <img 
-                                    src="<?php echo $image['url']; ?>" 
-                                    alt="<?php echo $image['alt']; ?>">
-                                <?php endif;
-                            ?>
+                            <img class="article-content__img-img" src="<?php 
+                                        if(has_post_thumbnail()) {
+                                            the_post_thumbnail_url();
+                                        } else {
+                                            echo get_template_directory_uri() . '/assets/img/not-found.png';
+                                        }
+                            ?>" alt="article-img" loading="lazy">
                         </div>
                         <div class="boost__desc v-col-lg-6 v-col-md-12">
-                            <h1 class="main__title black boost__title"><?php the_field('boost_title'); ?></h1>
-                            <button class="button__trial button__subscribe" type="button"><?php the_field('boost_link'); ?></button>
+                            <h1 class="main__title black boost__title"><?php the_title(); ?></h1>
+                            <button class="button__trial button__subscribe" type="button" data-subscribe>GET TRIAL</button>
                         </div>
                     </section>
 

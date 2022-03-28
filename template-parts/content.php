@@ -8,10 +8,12 @@
                     </a>
 				</div>
 				<h1 class="main__title black"><?php the_title(); ?></h1>
-                <a href="#" class="post__author black"><?php the_author_posts_link(); ?></a> 
-                <span class="post__date black"><?php the_time('M j, Y'); ?></span>
+                <div class="" style="margin-top: 20px">
+                    <a href="#" class="post__author black"><?php the_author_posts_link(); ?></a> 
+                    <span class="post__date black" style="margin-left: 20px"><?php the_time('M j, Y'); ?></span>
+                </div>
 			</div>
-			<div class="blog-page-intro__img v-col-lg-6 v-col-md-6">
+			<div class="blog-page-intro__img v-col-lg-6 v-col-md-6" style="text-align:center;">
                 <img class="article-content__img-img" src="<?php 
                     if(has_post_thumbnail()) {
                         the_post_thumbnail_url();
@@ -25,7 +27,7 @@
 
 	<section class="blog-page-post container">
         <div class="v-row">
-            <div class="blog-page-post__aside v-col-lg-3">
+            <div class="blog-page-post__aside v-col-lg-3" style="min-width: 300px">
                 <aside class="table-of-content v-col-lg-12" data-table-of-content>
                     <h2 class="post__title black">Table of content</h2>
                     <ul class="table-of-content__list" data-table>
@@ -101,14 +103,14 @@
 
     <section class="blog-form container">
         <div class="blog-form__container v-row">
-            <div class="header-main__logo v-col-lg-6 v-col-md-12">
+            <div class="header-main__logo v-col-lg-3 v-col-md-12">
                 <?php the_custom_logo(); ?>
                 <div class="header-main__logo-title">
                     <span class="header-main__logo-title--spy"><b>Spy</b>Stealth</span>
                     <p class="header-main__logo-title--text">Phone Tracking Software</p>
                 </div>
             </div>
-            <div class="blog-form__desc v-col-lg-6 v-col-md-12">
+            <div class="blog-form__desc v-col-lg-9 v-col-md-12">
                 <h1 class="main__title black">Give me the latest news!</h1>
                 <p class="post__text black">
                     Want to know which websites saw the most traffic growth in your industry? Not sure why your SEO strategy doesn’t work? Or simply looking for SEO tips? Subscribe to our newsletter to receive updates on the content you care about.

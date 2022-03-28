@@ -488,7 +488,7 @@
                                     }
                         ?>" alt="article-img" loading="lazy">
                     </div>
-                    <div class="boost__desc v-col-lg-6 v-col-md-12">
+                    <div class="boost__desc v-col-lg-6 v-col-md-12" style="width:100%">
                         <h1 class="main__title black boost__title"><?php the_title(); ?></h1>
                         <button class="button__trial button__subscribe" type="button" data-subscribe>GET TRIAL</button>
                     </div>

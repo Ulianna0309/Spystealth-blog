@@ -1,7 +1,7 @@
 <main class="main-content blog-page">
 	<section class="blog-page-intro container">
 		<div class="blog-page-intro__container v-row">
-			<div class="blog-page-intro__desc v-col-lg-6 v-col-md-6">
+			<div class="blog-page-intro__desc v-col-lg-6 v-col-md-6" style="width:100%">
 				<div class="blog-page-intro__category">
                     <a href="<?= $category_link?>" class="category-label">
                             <?= $category_name?>

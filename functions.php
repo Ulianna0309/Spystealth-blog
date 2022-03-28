@@ -28,8 +28,6 @@ function filter_nav_menu_link_attributes($atts, $item, $args) {
 
 
 
-
-
 function true_jquery_register()
 {
     if (!is_admin()) {
@@ -42,39 +40,6 @@ function true_jquery_register()
 add_action('init', 'true_jquery_register');
 
 
-// function contributors() {
-// 	global $wpdb;
-// 	$authors = $wpdb->get_results("SELECT ID, user_nicename from $wpdb->users WHERE display_name <> 'admin' ORDER BY display_name");
+require get_template_directory() . '/set_button_load_more.php';
 
-// 	foreach ($authors as $author ) {
-
-// 		echo "<li>";
-// 		echo "<a href=\"".get_bloginfo('url')."/author/";
-// 		the_author_meta('user_nicename', $author->ID);
-// 		echo "/\">";
-// 		echo get_avatar($author->ID);
-// 		echo "</a>";
-// 		echo '<p>';
-// 		echo "<a href=\"".get_bloginfo('url')."/author/";
-// 		the_author_meta('user_nicename', $author->ID);
-// 		echo "/\">";
-// 		the_author_meta('display_name', $author->ID);
-// 		echo "</a>";
-// 		echo "</p>";
-// 		echo "</li>";
-
-// 	}
-// }
-
-
-// add_filter('single_template', function($single_template){
-//     $parent = '8';
-//     $categories = get_categories('child_of=' . $parent);
-//     $cat_names = wp_list_pluck ($categories, 'name');
-
-//     if(has_category('movies') || has_category($cat_names)){
-//         $single_template = dirname (__FILE__) . '/single-template.php';
-//     }
-//     return $single_template;
-// }, PHP_INT_MAX, 2);
 ?>

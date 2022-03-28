@@ -40,6 +40,6 @@ function true_jquery_register()
 add_action('init', 'true_jquery_register');
 
 
-require get_template_directory() . '/set_button_load_more.php';
+// require get_template_directory() . '/set_button_load_more.php';
 
 ?>

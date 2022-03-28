@@ -3,26 +3,22 @@
 		<div class="blog-page-intro__container v-row">
 			<div class="blog-page-intro__desc v-col-lg-6 v-col-md-6">
 				<div class="blog-page-intro__category">
-					<a class="category-label" href=""><?php the_field('blog-page_intro-category'); ?></a> 
+                    <a href="<?= $category_link?>" class="category-label">
+                            <?= $category_name?>
+                    </a>
 				</div>
 				<h1 class="main__title black"><?php the_title(); ?></h1>
-				<button class="button__subscribe blog-page-intro__button" type="button"><?php the_field('blog-page_intro-link'); ?></button>
-				<div class="article-content__footer">
-					<a href="#" class="post__author black"><?php the_field('blog-page_intro-author'); ?></a> 
-					<span class="post__date black"><?php the_field('blog-page_intro-date'); ?></span>
-					<span class="post__time-to-read black"><?php the_field('blog-page_intro-time'); ?></span>
-				</div>
+                <a href="#" class="post__author black"><?php the_author_posts_link(); ?></a> 
+                <span class="post__date black"><?php the_time('M j, Y'); ?></span>
 			</div>
 			<div class="blog-page-intro__img v-col-lg-6 v-col-md-6">
-				<?php
-					$image = get_field('blog-page_intro-img');
-
-					if (!empty($image)): ?>
-						<img 
-						src="<?php echo $image['url']; ?>" 
-						alt="<?php echo $image['alt']; ?>">
-					<?php endif;
-				?>
+                <img class="article-content__img-img" src="<?php 
+                    if(has_post_thumbnail()) {
+                        the_post_thumbnail_url();
+                    } else {
+                        echo get_template_directory_uri() . '/assets/img/not-found.png';
+                    }
+                    ?>" alt="article-img" loading="lazy">
 			</div>
 		</div>
 	</section>
@@ -83,46 +79,6 @@
 	            </article><!-- #post-<?php the_ID(); ?> -->
 
 
-                <!-- <article class="blog-page-post__article">
-                    <p><?php the_field('blog-page_post-text-start'); ?></p>
-                    <ul class="blog-page-post__article-list"> 
-                        <li class="blog-page-post__article-list--item"><?php the_field('blog-page_post-list-item'); ?></li> 
-                        <li class="blog-page-post__article-list--item"><?php the_field('blog-page_post-list-item-2'); ?></li> 
-                        <li class="blog-page-post__article-list--item"><?php the_field('blog-page_post-list-item-3'); ?></li> 
-                        <li class="blog-page-post__article-list--item"><?php the_field('blog-page_post-list-item-4'); ?></li>
-                    </ul>
-                    <h2 class="main__title black"><?php the_field('blog-page_post-title'); ?></h2>
-                    <p>
-                        <?php the_field('blog-page_post-text'); ?>
-                    </p>
-                    <h2 class="main__title black"><?php the_field('blog-page_post-title-2'); ?></h2>
-                    <p><?php the_field('blog-page_post-text-2'); ?></p> 
-                    <h2 class="main__title black"><?php the_field('blog-page_post-title-3'); ?></h2>
-                    <p><?php the_field('blog-page_post-text-3'); ?></p>
-                    <h2 class="main__title black"><?php the_field('blog-page_post-title-4'); ?></h2>
-                    <p><?php the_field('blog-page_post-text-4'); ?></p>
-                    
-                    <div class="blog-page-get-trial">
-                        <div class="blog-page-get-trial__block">
-                            <div class="blog-page-get-trial__desc">
-                                <a href="#" class="blog-page-get-trial__desc-title post__title"><?php the_field('blog-page_post-get-trial-title'); ?></a>
-                                <p class="blog-page-get-trial__desc-text post__text"><?php the_field('blog-page_post-get-trial-text'); ?></p>
-                                <a class="button__read" href="#"><?php the_field('blog-page_post-get-trial-link'); ?></a>
-                            </div>
-                            <div class="blog-page-get-trial__img">
-                                <?php
-                                    $image = get_field('blog-page_post-get-trial-img');
-
-                                    if (!empty($image)): ?>
-                                        <img 
-                                        src="<?php echo $image['url']; ?>" 
-                                        alt="<?php echo $image['alt']; ?>">
-                                    <?php endif;
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </article> -->
         
         
                 <div class="social-links">
@@ -169,41 +125,39 @@
 
     <section class="boost container v-row">
         <?php 
-        $posts = get_posts( array(
-            'numberposts' => 1,
-            'category_name'    => 'boost',
-            'orderby'     => 'date',
-            'order'       => 'ASC',
-            'post_type'   => 'post',
-            'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
-        ) );
+            $posts = get_posts( array(
+                'numberposts' => 1,
+                'category_name'    => 'boost',
+                'orderby'     => 'date',
+                'order'       => 'ASC',
+                'post_type'   => 'post',
+                'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+            ) );
 
-        foreach( $posts as $post ){
-            setup_postdata($post);
-            ?>
+            foreach( $posts as $post ){
+                setup_postdata($post);
+                ?>
 
-            <section class="boost container v-row">
-                <div class="boost__img v-col-lg-6 v-col-md-12">
-                    <?php
-                        $image = get_field('boost_img');
+                <section class="boost container v-row">
+                    <div class="boost__img v-col-lg-6 v-col-md-12">
+                        <img class="article-content__img-img" src="<?php 
+                                    if(has_post_thumbnail()) {
+                                        the_post_thumbnail_url();
+                                    } else {
+                                        echo get_template_directory_uri() . '/assets/img/not-found.png';
+                                    }
+                        ?>" alt="article-img" loading="lazy">
+                    </div>
+                    <div class="boost__desc v-col-lg-6 v-col-md-12">
+                        <h1 class="main__title black boost__title"><?php the_title(); ?></h1>
+                        <button class="button__trial button__subscribe" type="button" data-subscribe>GET TRIAL</button>
+                    </div>
+                </section>
 
-                        if (!empty($image)): ?>
-                            <img 
-                            src="<?php echo $image['url']; ?>" 
-                            alt="<?php echo $image['alt']; ?>">
-                        <?php endif;
-                    ?>
-                </div>
-                <div class="boost__desc v-col-lg-6 v-col-md-12">
-                    <h1 class="main__title black boost__title"><?php the_field('boost_title'); ?></h1>
-                    <button class="button__trial button__subscribe" type="button"><?php the_field('boost_link'); ?></button>
-                </div>
-            </section>
+                <?php
+        }
 
-            <?php
-    }
-
-    wp_reset_postdata(); // сброс
-    ?>
-</section>
+        wp_reset_postdata(); // сброс
+        ?>
+    </section>
 </main>

@@ -3,60 +3,60 @@
 ?>
 
 <main class="main-content">
-    <section class="main-post">
-        <div class="container">
-        <?php 
-            $posts = get_posts( array(
-                'numberposts' => 1,
-                'category_name'    => 'main-post',
-                'orderby'     => 'date',
-                'order'       => 'ASC',
-                'post_type'   => 'post',
-                'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
-            ) );
+<section class="main-post">
+    <div class="container">
+    <?php 
+        $posts = get_posts( array(
+            'numberposts' => 1,
+            'category_name'    => 'main-post',
+            'orderby'     => 'date',
+            'order'       => 'ASC',
+            'post_type'   => 'post',
+            'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+        ) );
 
-            foreach( $posts as $post ){
-                setup_postdata($post);
-                ?>
-
-                <div class="main-post__block v-row">
-                    <?php
-                        $category = get_the_category();
-                        $category_name = $category[0]->name;
-                        $category_link = get_category_link( $category[0] )
-                    ?>
-                
-                    <div class="main-post__desc v-col-lg-5 v-col-md-12 v-col">
-                        <a href="<?php echo get_permalink(); ?>" class="main-post__desc-title post__title"><?php the_title(); ?></a>
-                        <p class="main-post__desc-text post__text"><?php the_field('main-post_text'); ?></p>
-                        <div class="main-post__desc-view">
-                            <span class="post__date"><?php the_time('M j, Y'); ?></span>
-                            <a href="<?= $category_link?>" class="post__category">
-                                <?= $category_name?>
-                            </a>
-                            <span class="post__time-to-read"><?php the_field('main-post_time'); ?></span>
-                        </div>
-                    </div>
-                    <a href="<?php echo get_permalink(); ?>" class="main-post__img v-col-lg-5 v-col-md-12 v-col">
-                        <?php
-                            $image = get_field('main-post_img');
-
-                            if (!empty($image)): ?>
-                                <img 
-                                src="<?php echo $image['url']; ?>" 
-                                alt="<?php echo $image['alt']; ?>">
-                        <?php endif;?>
-                    </a>
-                </div>
-
-            <?php
-            }
-
-            wp_reset_postdata(); // сброс
+        foreach( $posts as $post ){
+            setup_postdata($post);
             ?>
 
-        </div>
-    </section>
+            <div class="main-post__block v-row">
+                <?php
+                    $category = get_the_category();
+                    $category_name = $category[0]->name;
+                    $category_link = get_category_link( $category[0] )
+                ?>
+            
+                <div class="main-post__desc v-col-lg-5 v-col-md-12 v-col">
+                    <a href="<?php echo get_permalink(); ?>" class="main-post__desc-title post__title"><?php the_title(); ?></a>
+                    <p class="main-post__desc-text post__text"><?php the_field('main-post_text'); ?></p>
+                    <div class="main-post__desc-view">
+                        <span class="post__date"><?php the_time('M j, Y'); ?></span>
+                        <a href="<?= $category_link?>" class="post__category">
+                            <?= $category_name?>
+                        </a>
+                        <span class="post__time-to-read"><?php the_field('main-post_time'); ?></span>
+                    </div>
+                </div>
+                <a href="<?php echo get_permalink(); ?>" class="main-post__img v-col-lg-5 v-col-md-12 v-col">
+                    <?php
+                        $image = get_field('main-post_img');
+
+                        if (!empty($image)): ?>
+                            <img 
+                            src="<?php echo $image['url']; ?>" 
+                            alt="<?php echo $image['alt']; ?>">
+                    <?php endif;?>
+                </a>
+            </div>
+
+        <?php
+        }
+
+        wp_reset_postdata(); // сброс
+        ?>
+
+    </div>
+</section>
 
 
 <section class="articles container">

@@ -174,8 +174,8 @@
                             </p>
                         </div>
                         <div class="article-content__footer">
-                            <a href="#" class="post__category">
-                               <?php the_field('editor_category'); ?>
+                            <a href="<?= $category_link?>" class="post__category">
+                                <?= $category_name?>
                             </a>
                             <span class="post__date">
                                 <?php the_time('M j, Y'); ?>
@@ -217,7 +217,9 @@
                                 </p>
                             </div>
                             <div class="article-content__footer">
-                                <a href="#" class="post__category"><?php the_field('editor_category'); ?></a>
+                            <a href="<?= $category_link?>" class="post__category">
+                                <?= $category_name?>
+                            </a>
                                 <span class="post__date"><?php the_time('M j, Y'); ?></span>
                             </div>
                         </div>
@@ -250,6 +252,9 @@
             ?>
             <div class="main-post-event__block v-row">
                 <div class="main-post-event__desc v-col-lg-6 v-col-md-12">
+                    <a href="<?= $category_link?>" class="mark-round bg-orange black">
+                            <?= $category_name?>
+                    </a>
                     <span class="mark-round bg-orange black"><?php the_field('online-event_span'); ?></span>
                     <a href="<?php echo get_permalink(); ?>" class="main-post-event__desc-title post__title"><?php the_title(); ?></a>
                     <p class="main-post-event__desc-text post__text"><?php the_field('online-event_text'); ?></p>
@@ -408,6 +413,9 @@
                              ?>" alt="article-img" loading="lazy">
                     </div>
                     <div class="article-content__header">
+                    <a href="<?= $category_link?>" class="mark-round bg-orange black">
+                            <?= $category_name?>
+                    </a>
                         <a href="#" class="post__category"><?php the_field('article_category'); ?></a>
                         <span class="post__time-to-read"><?php the_field('article_time'); ?></span>
                     </div>
@@ -520,6 +528,9 @@
                              ?>" alt="article-img" loading="lazy">
                     </div>
                     <div class="article-content__header">
+                    <a href="<?= $category_link?>" class="mark-round bg-orange black">
+                            <?= $category_name?>
+                    </a>
                         <a href="#" class="post__category"><?php the_field('article_category'); ?></a>
                         <span class="post__time-to-read"><?php the_field('article_time'); ?></span>
                     </div>

@@ -27,28 +27,35 @@
 
 	<section class="blog-page-post container">
         <div class="v-row">
-            <div class="blog-page-post__aside v-col-lg-3" style="min-width: 300px">
-                <aside class="table-of-content v-col-lg-12" data-table-of-content>
+            <div class="blog-page-post__aside v-col-lg-3" style="min-width: 300px;">
+                <aside class="table-of-content v-col-lg-12" >
                     <h2 class="post__title black">Table of content</h2>
-                    <ul class="table-of-content__list" data-table>
-                        <li class="table-of-content__list-item">
-                            <a class="table-of-content__list-item--link black" href="#">Move #1. Check What’s New in Your Backlink Profile</a>
-                        </li>
-                        <li class="table-of-content__list-item">
-                            <a class="table-of-content__list-item--link black" href="#">Move #2. Get Back Any Links You’ve Lost</a>
-                        </li>
-                        <li class="table-of-content__list-item">
-                            <a class="table-of-content__list-item--link black" href="#">Move #3. Cherry-pick New Link Building Ideas from the Right Rivals</a>
-                        </li>
-                        <li class="table-of-content__list-item">
-                            <a class="table-of-content__list-item--link black" href="#">Move #4. Find Content Ideas to Attract Links</a>
-                        </li>
-                        <li class="table-of-content__list-item">
-                            <a class="table-of-content__list-item--link black" href="#">Move #6. Audit Your Anchor Texts</a>
-                        </li>
-                        <li class="table-of-content__list-item">
-                            <a class="table-of-content__list-item--link black" href="#">Move #7. Get Rid of Toxic Backlinks</a>
-                        </li>
+                    <ul class="table-of-content__list">
+                    <?php 
+                            $posts = get_posts( array(
+                                'numberposts' => 6,
+                                'orderby'     => 'date',
+                                'order'       => 'desc',
+                                'post_type'   => 'post',
+                                'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+                            ) );
+
+                            foreach( $posts as $post ){
+                                setup_postdata($post);
+                                ?>
+                                <?php
+                                    $category = get_the_category();
+                                    $category_name = $category[0]->name;
+                                    $category_link = get_category_link( $category[0] )
+                                ?>
+                                 <li class="table-of-content__list-item">
+                                    <a href="<?php echo get_permalink(); ?>" class="table-of-content__list-item--link black"><?php the_title(); ?></a>
+                                </li>
+                            <?php
+                        }
+                        wp_reset_postdata(); // сброс
+                        ?>
+                       
                     </ul>
                 </aside>
             </div>
@@ -103,14 +110,14 @@
 
     <section class="blog-form container">
         <div class="blog-form__container v-row">
-            <div class="header-main__logo v-col-lg-3 v-col-md-12">
+           <div class="header-main__logo v-col-lg-6 v-col-md-12" style="justify-content: center;">
                 <?php the_custom_logo(); ?>
                 <div class="header-main__logo-title">
                     <span class="header-main__logo-title--spy"><b>Spy</b>Stealth</span>
                     <p class="header-main__logo-title--text">Phone Tracking Software</p>
                 </div>
             </div>
-            <div class="blog-form__desc v-col-lg-9 v-col-md-12">
+            <div class="blog-form__desc v-col-lg-6 v-col-md-12">
                 <h1 class="main__title black">Give me the latest news!</h1>
                 <p class="post__text black">
                     Want to know which websites saw the most traffic growth in your industry? Not sure why your SEO strategy doesn’t work? Or simply looking for SEO tips? Subscribe to our newsletter to receive updates on the content you care about.
@@ -122,44 +129,5 @@
                 </div>
             </div>
         </div>
-    </section>
-
-
-    <section class="boost container v-row">
-        <?php 
-            $posts = get_posts( array(
-                'numberposts' => 1,
-                'category_name'    => 'boost',
-                'orderby'     => 'date',
-                'order'       => 'ASC',
-                'post_type'   => 'post',
-                'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
-            ) );
-
-            foreach( $posts as $post ){
-                setup_postdata($post);
-                ?>
-
-                <section class="boost container v-row">
-                    <div class="boost__img v-col-lg-6 v-col-md-12">
-                        <img class="article-content__img-img" src="<?php 
-                                    if(has_post_thumbnail()) {
-                                        the_post_thumbnail_url();
-                                    } else {
-                                        echo get_template_directory_uri() . '/assets/img/not-found.png';
-                                    }
-                        ?>" alt="article-img" loading="lazy">
-                    </div>
-                    <div class="boost__desc v-col-lg-6 v-col-md-12">
-                        <h1 class="main__title black boost__title"><?php the_title(); ?></h1>
-                        <button class="button__trial button__subscribe" type="button" data-subscribe>GET TRIAL</button>
-                    </div>
-                </section>
-
-                <?php
-        }
-
-        wp_reset_postdata(); // сброс
-        ?>
     </section>
 </main>

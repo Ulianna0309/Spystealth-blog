@@ -27,39 +27,10 @@
 
 	<section class="blog-page-post container">
         <div class="v-row">
-            <div class="blog-page-post__aside v-col-lg-3" style="min-width: 300px;">
-                <aside class="table-of-content v-col-lg-12" >
-                    <h2 class="post__title black">Table of content</h2>
-                    <ul class="table-of-content__list">
-                    <?php 
-                            $posts = get_posts( array(
-                                'numberposts' => 6,
-                                'orderby'     => 'date',
-                                'order'       => 'desc',
-                                'post_type'   => 'post',
-                                'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
-                            ) );
-
-                            foreach( $posts as $post ){
-                                setup_postdata($post);
-                                ?>
-                                <?php
-                                    $category = get_the_category();
-                                    $category_name = $category[0]->name;
-                                    $category_link = get_category_link( $category[0] )
-                                ?>
-                                 <li class="table-of-content__list-item">
-                                    <a href="<?php echo get_permalink(); ?>" class="table-of-content__list-item--link black"><?php the_title(); ?></a>
-                                </li>
-                            <?php
-                        }
-                        wp_reset_postdata(); // сброс
-                        ?>
-                       
-                    </ul>
-                </aside>
+            <div class="blog-page-post__aside v-col-lg-3 v-col-md-3 v-col" style="min-width: 300px;">
+                <?php get_sidebar(); ?>
             </div>
-            <div class="blog-page-post__post v-col-lg-9 v-col-md-12 v-col">
+            <div class="blog-page-post__post v-col-lg-9 v-col-md-9 v-col">
 			    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 					<div class="entry-content blog-page-post__article">
 						<?php

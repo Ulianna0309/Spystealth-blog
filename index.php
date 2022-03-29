@@ -4,6 +4,7 @@
 
 
 <main class="main-content">
+
     <section class="main-post">
         <div class="container">
         <?php 
@@ -121,7 +122,6 @@
     </section>
 
 
-
     <section class="editor-post container v-row">
         <h1 class="main__title black v-col">Editors' Choice</h1>
         <div class="articles">
@@ -221,6 +221,7 @@
         </div>
     </section>
 
+
     <section class="main-post-event container">
         <?php 
             $posts = get_posts( array(
@@ -267,6 +268,7 @@
             wp_reset_postdata(); // сброс
             ?>
     </section>
+
 
     <section class="seo-category container">
         <h1 class="main__title black">SEO</h1>
@@ -356,6 +358,7 @@
         </div>
     </section>
 
+
     <section class="main-form container">
         <div class="main-form__container v-row">
             <div class="main-form__desc v-col-lg-5">
@@ -373,6 +376,7 @@
             <img class="main-form__img v-col-lg-5" src="<?php echo bloginfo('template_url'); ?>/assets/img/anytime.png" alt="anytime" loading="lazy">
         </div>
     </section>
+
 
     <section class="seo-category container marketing-category">
         <h1 class="main__title black">Marketing</h1>
@@ -498,6 +502,7 @@
         wp_reset_postdata(); // сброс
         ?>
     </section>
+    
 
     <section class="seo-category container content-category">
         <h1 class="main__title black">Content</h1>

@@ -56,6 +56,7 @@ function right_register_wp_sidebars() {
 }
 add_action( 'widgets_init', 'right_register_wp_sidebars' );
 
+
 // require get_template_directory() . '/set_button_load_more.php';
 
 ?>

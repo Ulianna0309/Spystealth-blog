@@ -5,7 +5,7 @@ $term = get_queried_object();
     <div class="v-row article__container" style="width: 100%">
             <?php
             $args = array(
-                'posts_per_page' => 6,
+                'posts_per_page' => -1,
                 'post_type' => 'post',
                 'author' => get_queried_object() -> ID
             );

@@ -60,24 +60,20 @@
         </div>
     </section>
 
+    
+    <section id="primary" class="content-area articles container">
+        <?php $args = array(
+            'post_type' => 'post',
+            'post_status' => 'publish',
+            'posts_per_page' => '3',
+            'paged' => 1,
+        );
+        $blog_posts = new WP_Query( $args ); ?>
+        <?php if ( $blog_posts->have_posts() ) : ?>
+            <div class="blog-posts v-row">
+            <?php while ( $blog_posts->have_posts() ) : $blog_posts->the_post(); ?>
 
-    <section class="articles container">
-        <div class="v-row">
-
-        <?php 
-            $posts = get_posts( array(
-                'numberposts' => -1,
-                'category_name'    => 'article',
-                'orderby'     => 'date',
-                'order'       => 'ASC',
-                'post_type'   => 'post',
-                'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
-            ) );
-
-            foreach( $posts as $post ){
-                setup_postdata($post);
-                ?>
-                <article class="article v-col-lg-4 v-col-md-6 v-col">
+            <article class="article v-col-lg-4 v-col-md-6 v-col">
                     <?php
                         $category = get_the_category();
                         $category_name = $category[0]->name;
@@ -112,14 +108,31 @@
                         </div>
                     </div>
                 </article>
-            <?php
-            }
-
-            wp_reset_postdata(); // сброс
-            ?>
-
-        </div>
+                               
+            <?php endwhile; ?>
+            </div>
+            <div class="loadmore button_load-more" style="display: flex;align-items: center;font-weight: 600;line-height: 100%;text-transform: uppercase;color: #58a2ec;
+            cursor: pointer;transition: background-color .3s ease-in-out, color .3s ease-in-out;border: 1px solid #58a2ec;height: 42px;border-radius: 5px;text-align: center;
+            justify-content: center;font-size: 14px;background-color: transparent;padding: 13px 24px;margin-top:40px">Load More</div>
+            <span class="no-more-post" style="display: flex;align-items: center;font-weight: 600;line-height: 100%;text-transform: uppercase;color: #58a2ec;
+            cursor: pointer;transition: background-color .3s ease-in-out, color .3s ease-in-out;text-align: center;
+            justify-content: center;font-size: 14px;background-color: transparent;padding: 13px 24px;margin-top:40px"></span>
+        <?php endif; ?>
     </section>
+    
+
+
+
+
+
+
+
+ 
+
+
+
+
+
 
 
     <section class="editor-post container v-row">

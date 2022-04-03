@@ -57,6 +57,91 @@ function right_register_wp_sidebars() {
 add_action( 'widgets_init', 'right_register_wp_sidebars' );
 
 
-// require get_template_directory() . '/set_button_load_more.php';
+
+
+
+
+  function thecodehubs_enqueue_script_style() {
+    wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css', array(), '1.0.0', 'all');
+    wp_register_script( 'custom-script', get_stylesheet_directory_uri(). '/js/man-min.js', array('jquery'), false, true );
+    // Localize the script with new data
+    $script_data_array = array(
+      'ajaxurl' => admin_url( 'admin-ajax.php' ),
+      'security' => wp_create_nonce( 'load_more_posts' ),
+    );
+    wp_localize_script( 'custom-script', 'blog', $script_data_array );
+    // Enqueued script with localized data.
+    wp_enqueue_script( 'custom-script' ); 
+  }
+  add_action( 'wp_enqueue_scripts', 'thecodehubs_enqueue_script_style' );
+  function load_posts_by_ajax_callback() {
+    check_ajax_referer('load_more_posts', 'security');
+    $paged = $_POST['page'];
+    $args = array(
+      'post_type' => 'post',
+      'post_status' => 'publish',
+      'posts_per_page' => '3',
+      'paged' => $paged,
+      'category_name'    => 'article',
+    );
+    $blog_posts = new WP_Query( $args ); ?>
+    <?php if ( $blog_posts->have_posts() ) : ?>
+      <?php while ( $blog_posts->have_posts() ) : $blog_posts->the_post(); ?>
+      <article class="article v-col-lg-4 v-col-md-6 v-col">
+            <?php
+                $category = get_the_category();
+                $category_name = $category[0]->name;
+                $category_link = get_category_link( $category[0] )
+            ?>
+            <div class="article-content">
+                <div class="article-content__img bg-orange">
+                    <a href="<?php echo get_permalink(); ?>">
+                        <img class="article-content__img-img" src="<?php 
+                            if(has_post_thumbnail()) {
+                                the_post_thumbnail_url();
+                            } else {
+                                echo get_template_directory_uri() . '/assets/img/not-found.png';
+                            }
+                            ?>" alt="article-img" loading="lazy">
+                    </a>
+                </div>
+                <div class="article-content__header">
+                    <a href="<?= $category_link?>" class="post__category">
+                        <?= $category_name?>
+                    </a>
+                    <span class="post__date"><?php the_time('M j, Y'); ?></span>
+                </div>
+                <div class="article-content__body">
+                    <a href="<?php echo get_permalink(); ?>" class="post__title"><?php the_title(); ?></a>
+                    <p class="post__text article-content__body-text">
+                        <?php the_excerpt(); ?>
+                    </p>
+                </div>
+                <div class="article-content__footer">
+                    <div href="#" class="post__author"><?php the_author_posts_link(); ?></div>
+                </div>
+            </div>
+        </article>
+      <?php endwhile; 
+    endif;
+    wp_die();
+  }
+  add_action('wp_ajax_load_posts_by_ajax', 'load_posts_by_ajax_callback');
+  add_action('wp_ajax_nopriv_load_posts_by_ajax', 'load_posts_by_ajax_callback');
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
 
 ?>

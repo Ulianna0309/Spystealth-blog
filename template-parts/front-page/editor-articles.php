@@ -4,7 +4,7 @@
 
             <?php 
                 $posts = get_posts( array(
-                    'numberposts' => -1,
+                    'numberposts' => 4,
                     'category_name'    => 'editor',
                     'orderby'     => 'date',
                     'order'       => 'ASC',
@@ -52,7 +52,7 @@
             <div class="swiper-wrapper editor-post__container">
             <?php 
                 $posts = get_posts( array(
-                    'numberposts' => -1,
+                    'numberposts' => 4,
                     'category_name'    => 'editor',
                     'orderby'     => 'date',
                     'order'       => 'ASC',

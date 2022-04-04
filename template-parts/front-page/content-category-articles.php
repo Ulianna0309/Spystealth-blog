@@ -31,7 +31,7 @@
 
             <?php 
             $posts = get_posts( array(
-                'numberposts' => -1,
+                'numberposts' => 3,
                 'category_name'    => 'content-category',
                 'orderby'     => 'date',
                 'order'       => 'ASC',

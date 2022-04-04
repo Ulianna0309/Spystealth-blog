@@ -30,7 +30,7 @@
 
             <?php 
             $posts = get_posts( array(
-                'numberposts' => -1,
+                'numberposts' => 3,
                 'category_name'    => 'marketing-category',
                 'orderby'     => 'date',
                 'order'       => 'ASC',

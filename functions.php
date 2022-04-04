@@ -61,7 +61,7 @@ add_action( 'widgets_init', 'right_register_wp_sidebars' );
 
 
 
-  function thecodehubs_enqueue_script_style() {
+function thecodehubs_enqueue_script_style() {
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css', array(), '1.0.0', 'all');
     wp_register_script( 'custom-script', get_stylesheet_directory_uri(). '/js/man-min.js', array('jquery'), false, true );
     // Localize the script with new data
@@ -132,7 +132,8 @@ add_action( 'widgets_init', 'right_register_wp_sidebars' );
 
 
 
-  
+  require get_template_directory() . '/function-include/set_button_load_more.php';
+  require get_template_directory() . '/function-include/load_more_all_posts.php';
 
 
 

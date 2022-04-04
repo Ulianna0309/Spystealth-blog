@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /wp-admin
+Allow: /wp-admin/admin-ajax.php
+Disallow: /wp-trackback
+Disallow: /wp-feed
+Disallow: /wp-comments
+Disallow: */trackback
+Disallow: */feed
+Disallow: */comments
+Disallow: *?

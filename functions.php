@@ -99,6 +99,9 @@ function thecodehubs_enqueue_script_style() {
     wp_enqueue_script( 'custom-script' ); 
   }
   add_action( 'wp_enqueue_scripts', 'thecodehubs_enqueue_script_style' );
+
+
+
   function load_posts_by_ajax_callback() {
     check_ajax_referer('load_more_posts', 'security');
     $paged = $_POST['page'];
@@ -157,11 +160,20 @@ function thecodehubs_enqueue_script_style() {
 
 
 
+
+
+
+  
+
   require get_template_directory() . '/function-include/set_button_load_more.php';
 //   require get_template_directory() . '/function-include/load_more_all_posts.php';
 
 
 
     
+
+
+
+
 
 ?>

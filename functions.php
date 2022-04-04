@@ -164,9 +164,41 @@ function thecodehubs_enqueue_script_style() {
 
 
   
+ 
 
-  require get_template_directory() . '/function-include/set_button_load_more.php';
-//   require get_template_directory() . '/function-include/load_more_all_posts.php';
+
+
+
+
+
+
+  
+require get_template_directory() . '/function-include/pageview_counter.php';
+
+// функция вывода кнопки подгрузки постов
+require get_template_directory() . '/function-include/set_button_load_more.php';
+
+// Фильтрация записей на главной странице блога
+require get_template_directory() . '/function-include/load_filtered_blog_posts.php';
+
+// Подгрузка последних записей на главной странице блога
+require get_template_directory() . '/function-include/load_more_all_posts.php';
+
+// Подгрузка последних записей в категории tips
+require get_template_directory() . '/function-include/load_more_tips_posts.php';
+
+// Подгрузка последних записей в категории online safety
+require get_template_directory() . '/function-include/load_more_online_safety_posts.php';
+
+// Подгрузка последних записей в категории parental control
+require get_template_directory() . '/function-include/load_more_parental_control_posts.php';
+
+// Подгрузка последних записей на странице автора
+require get_template_directory() . '/function-include/load_more_author_posts.php';
+
+// Подгрузка отлфильтрованных простов автора
+require get_template_directory() . '/function-include/load_filtered_author_posts.php';
+
 
 
 

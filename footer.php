@@ -28,34 +28,6 @@
                     ] );
                 ?>
             </div>
-            <div class="footer__block v-col-lg-3 v-col-md-6 v-col">
-                  <h3 class="footer__block-title">PRIVACY</h3>
-                  <?php 
-                        wp_nav_menu( [
-                            'menu'            => 'Privacy', 
-                            'container'       => false, 
-                            'menu_class'      => 'footer__block-list', 
-                            'echo'            => true,
-                            'fallback_cb'     => 'wp_page_menu',
-                            'items_wrap'      => '<ul class="footer__block-list">%3$s</ul>',
-                            'depth'           => 1
-                        ] );
-                    ?>
-            </div>
-            <div class="footer__block v-col-lg-3 v-col-md-6 v-col">
-               <h3 class="footer__block-title">WORK WITH US</h3>
-               <?php 
-                    wp_nav_menu( [
-                        'menu'            => 'Work-with-us', 
-                        'container'       => false, 
-                        'menu_class'      => 'footer__block-list', 
-                        'echo'            => true,
-                        'fallback_cb'     => 'wp_page_menu',
-                        'items_wrap'      => '<ul class="footer__block-list">%3$s</ul>',
-                        'depth'           => 1
-                    ] );
-                ?>
-            </div>
         </div>
         <div class="footer__card">
             <div class="footer__card-block container">

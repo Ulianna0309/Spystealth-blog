@@ -31,7 +31,8 @@
                         </div>
                         <div class="article-content" style="width:100%">
                             <div class="article-content__header">
-                                <span class="post__time-to-read" style="width:100%"><?php the_time('M j, Y'); ?></span>
+                                <span class="post__time-to-read"><?php the_time('M j, Y'); ?></span>
+                                <?php echo reading_time() .' read'; ?>
                             </div>
                             <div class="article-content__body" style="width:100%">
                                 <a href="<?php the_permalink(); ?>" class="post__title"><?php the_title(); ?></a>

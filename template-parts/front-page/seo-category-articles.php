@@ -62,7 +62,7 @@
                             <a href="<?= $category_link?>" class="post__category">
                                 <?= $category_name?>
                             </a>
-                            <span class="post__time-to-read"><?php the_field('article_time'); ?></span>
+                            <?php echo reading_time() .' read'; ?>
                         </div>
                         <div class="article-content__body">
                             <a href="<?php echo get_permalink(); ?>" class="post__title"><?php the_title(); ?></a>

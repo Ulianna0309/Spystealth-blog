@@ -21,10 +21,12 @@ function filter_nav_menu_link_attributes($atts, $item, $args) {
         if ($item->current) {
             $atts['class'] .= ' header-top__menu-item--link--active';
         }
-    };
+    }
 
     return $atts;
 }
+
+
 
 
 
@@ -57,13 +59,36 @@ function right_register_wp_sidebars() {
 add_action( 'widgets_init', 'right_register_wp_sidebars' );
 
 
+## Удаляет "Рубрика: ", "Метка: ", "Категория: " и т.д. из заголовка архива
+add_filter( 'get_the_archive_title', function( $title ){
+    return strip_tags( preg_replace('~^[^:]+: ~', '', $title ) );
+});
+
+
+## reading time
+function reading_time() {
+	$content = get_post_field( 'post_content', $post->ID );
+	$word_count = str_word_count( strip_tags( $content ) );
+	$readingtime = ceil($word_count / 200);
+	if ($readingtime == 1) {
+		$timer = " min";
+	} else {
+		$timer = " mins";
+	}
+	$totalreadingtime = $readingtime . $timer;
+	return $totalreadingtime;
+}
 
 
 
+
+
+
+## load-more для articles
 
 function thecodehubs_enqueue_script_style() {
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css', array(), '1.0.0', 'all');
-    wp_register_script( 'custom-script', get_stylesheet_directory_uri(). '/js/man-min.js', array('jquery'), false, true );
+    wp_register_script( 'custom-script', get_stylesheet_directory_uri(). '/assets/js/load-more.js', array('jquery'), false, true );
     // Localize the script with new data
     $script_data_array = array(
       'ajaxurl' => admin_url( 'admin-ajax.php' ),
@@ -133,13 +158,7 @@ function thecodehubs_enqueue_script_style() {
 
 
   require get_template_directory() . '/function-include/set_button_load_more.php';
-  require get_template_directory() . '/function-include/load_more_all_posts.php';
-
-
-
-
-
-
+//   require get_template_directory() . '/function-include/load_more_all_posts.php';
 
 
 

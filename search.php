@@ -3,7 +3,7 @@ $search = get_queried_object();
 ?>
 <main class="main-content search-content">
     <div class="articles container">
-        <h1 class="v-col">Поиск по: "<?php echo $_GET['s'];?>"</h1>
+        <h1 class="v-col">Search by: "<?php echo $_GET['s'];?>"</h1>
         <div class="v-row search__container">
             <?php
             $args = array_merge( $wp_query->query, array( 'post_type' => array("post", "mypost")) );

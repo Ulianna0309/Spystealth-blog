@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 	<head>
-		<meta charset="utf-8">
+    <meta charset="<?php bloginfo( 'charset' ); ?>">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title><?php bloginfo('name'); echo " | "; bloginfo('description'); ?></title>
+    <title><?php bloginfo('name'); echo " | "; bloginfo('description'); ?></title>
+    <?php 
+        wp_head();
+    ?>
     <meta name="theme-color" content="#c9e0e04d">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -13,9 +18,6 @@
     <link rel="manifest" href="<?php echo bloginfo('template_url'); ?>/assets/img/favicons/site.webmanifest">
     <link rel="mask-icon" href="<?php echo bloginfo('template_url'); ?>/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
-    <?php 
-        wp_head();
-    ?>
 </head>
 <body class="light-theme">
   <header class="header" data-main-menu-block>

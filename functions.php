@@ -206,6 +206,13 @@ require get_template_directory() . '/function-include/load_filtered_author_posts
 
 
 
+add_filter( 'search_link', 'filter_function_name_9714', 10, 2 );
+function filter_function_name_9714( $link, $search ){
+	// filter...
+
+	return $link;
+}
+
 
 
 ?>

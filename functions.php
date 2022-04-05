@@ -84,7 +84,7 @@ function reading_time() {
 
 
 
-## load-more для articles
+## load-more для all articles
 
 function thecodehubs_enqueue_script_style() {
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css', array(), '1.0.0', 'all');
@@ -136,7 +136,7 @@ function thecodehubs_enqueue_script_style() {
                     <a href="<?= $category_link?>" class="post__category">
                         <?= $category_name?>
                     </a>
-                    <span class="post__date"><?php the_time('M j, Y'); ?></span>
+                    <?php echo reading_time() .' read'; ?>
                 </div>
                 <div class="article-content__body">
                     <a href="<?php echo get_permalink(); ?>" class="post__title"><?php the_title(); ?></a>
@@ -146,6 +146,7 @@ function thecodehubs_enqueue_script_style() {
                 </div>
                 <div class="article-content__footer">
                     <div href="#" class="post__author"><?php the_author_posts_link(); ?></div>
+                    <span class="post__date"><?php the_time('M j, Y'); ?></span>
                 </div>
             </div>
         </article>

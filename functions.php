@@ -110,7 +110,6 @@ function thecodehubs_enqueue_script_style() {
       'post_status' => 'publish',
       'posts_per_page' => '3',
       'paged' => $paged,
-      'category_name'    => 'article',
     );
     $blog_posts = new WP_Query( $args ); ?>
     <?php if ( $blog_posts->have_posts() ) : ?>
